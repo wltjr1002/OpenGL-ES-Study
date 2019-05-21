@@ -10,6 +10,8 @@
 		EB6C1B0122939EE6009820AA /* VertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EB6C1AFD22939EE6009820AA /* VertexShader.glsl */; };
 		EB6C1B0222939EE6009820AA /* UserShader.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6C1AFE22939EE6009820AA /* UserShader.m */; };
 		EB6C1B0322939EE6009820AA /* FragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EB6C1B0022939EE6009820AA /* FragmentShader.glsl */; };
+		EB6C1B3F2293EB75009820AA /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6C1B3E2293EB75009820AA /* Model.m */; };
+		EB6C1B432293F210009820AA /* Square.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6C1B422293F210009820AA /* Square.m */; };
 		EBCB61B22282E4A800CA8706 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB61B12282E4A800CA8706 /* AppDelegate.m */; };
 		EBCB61B52282E4A800CA8706 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB61B42282E4A800CA8706 /* ViewController.m */; };
 		EBCB61B82282E4A800CA8706 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBCB61B62282E4A800CA8706 /* Main.storyboard */; };
@@ -26,6 +28,11 @@
 		EB6C1AFE22939EE6009820AA /* UserShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserShader.m; sourceTree = "<group>"; };
 		EB6C1AFF22939EE6009820AA /* UserShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserShader.h; sourceTree = "<group>"; };
 		EB6C1B0022939EE6009820AA /* FragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FragmentShader.glsl; sourceTree = "<group>"; };
+		EB6C1B3D2293EB75009820AA /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		EB6C1B3E2293EB75009820AA /* Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		EB6C1B402293EBAF009820AA /* SceneVertex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneVertex.h; sourceTree = "<group>"; };
+		EB6C1B412293F210009820AA /* Square.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Square.h; sourceTree = "<group>"; };
+		EB6C1B422293F210009820AA /* Square.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Square.m; sourceTree = "<group>"; };
 		EBCB61AD2282E4A800CA8706 /* OpenGl_Triangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGl_Triangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBCB61B02282E4A800CA8706 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EBCB61B12282E4A800CA8706 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -79,6 +86,11 @@
 				EB6C1B0022939EE6009820AA /* FragmentShader.glsl */,
 				EB6C1AFF22939EE6009820AA /* UserShader.h */,
 				EB6C1AFE22939EE6009820AA /* UserShader.m */,
+				EB6C1B402293EBAF009820AA /* SceneVertex.h */,
+				EB6C1B3D2293EB75009820AA /* Model.h */,
+				EB6C1B3E2293EB75009820AA /* Model.m */,
+				EB6C1B412293F210009820AA /* Square.h */,
+				EB6C1B422293F210009820AA /* Square.m */,
 				EBCB61B02282E4A800CA8706 /* AppDelegate.h */,
 				EBCB61B12282E4A800CA8706 /* AppDelegate.m */,
 				EBCB61B32282E4A800CA8706 /* ViewController.h */,
@@ -174,10 +186,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB6C1B432293F210009820AA /* Square.m in Sources */,
 				EBCB61B52282E4A800CA8706 /* ViewController.m in Sources */,
 				EB6C1B0222939EE6009820AA /* UserShader.m in Sources */,
 				EBCB61C02282E4A900CA8706 /* main.m in Sources */,
 				EBCB61B22282E4A800CA8706 /* AppDelegate.m in Sources */,
+				EB6C1B3F2293EB75009820AA /* Model.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
