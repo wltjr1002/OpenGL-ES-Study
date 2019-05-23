@@ -1,8 +1,8 @@
 //
-//  Square.h
+//  Cube.h
 //  OpenGl_Triangle
 //
-//  Created by clonekim on 21/05/2019.
+//  Created by clonekim on 23/05/2019.
 //  Copyright © 2019 clonekim. All rights reserved.
 //
 
@@ -10,8 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Square : Model
-
+@interface Cube : Model
 
 -(instancetype)initWithShader:(UserShader *)shader;
 

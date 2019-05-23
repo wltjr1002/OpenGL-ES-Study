@@ -12,6 +12,7 @@
 typedef struct{
     GLKVector3 positionCoords;
     GLKVector3 colorCoords;
+    //GLKVector3 normal;
 }
 SceneVertex;
 

@@ -7,11 +7,14 @@
 //
 
 #import "UserShader.h"
-#import <GLKit/GLKit.h>
 
 @implementation UserShader
 {
     GLuint programHandle;
+    GLuint modelViewMatrix_u;
+    GLuint projectionMatrix_u;
+    GLuint lightColor_u;
+    GLuint lightAmbientIntensity_u;
 }
 
 - (id) init
@@ -29,6 +32,11 @@
 - (void) useProgram
 {
     glUseProgram(programHandle);
+    glUniformMatrix4fv(modelViewMatrix_u, 1, 0, self.modelViewMatrix.m);
+    glUniformMatrix4fv(projectionMatrix_u, 1, 0, self.projectionMatrix.m);
+    
+    glUniform3f(lightColor_u, 1, 1, 1);
+    glUniform1f(lightAmbientIntensity_u, 0.8);
 }
 
 - (void)prepareProgramWithVertexShader:(NSString *)vsPath FragmentShader:(NSString *)fsPath
@@ -51,6 +59,13 @@
         NSLog(@"%@", messageString);
         exit(1);
     }
+    
+    self.modelViewMatrix = GLKMatrix4Identity;
+    modelViewMatrix_u = glGetUniformLocation(programHandle, "u_ModelViewMatrix");
+    projectionMatrix_u = glGetUniformLocation(programHandle, "u_ProjectionMatrix");
+    lightColor_u = glGetUniformLocation(programHandle, "u_Light.Color");
+    lightAmbientIntensity_u = glGetUniformLocation(programHandle, "u_Light.AmbientIntensity");
+    
     
 }
 

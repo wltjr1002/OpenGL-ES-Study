@@ -32,5 +32,8 @@ static int indices[] =
     }
     return self;
 }
+-(void)updateWithDelta:(NSTimeInterval)dt{
+    
+}
 
 @end
