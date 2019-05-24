@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 //-(instancetype) initWithName:(char *)name shader:(UserShader *)shader vertices:(SceneVertex *)vertices vertexCount:(unsigned int)count;
 
 -(void)render;
--(void)renderWithParentModelViewMatrix:(GLKMatrix4)parentModelViewMatrix;
+-(void)renderWithParentModelMatrix:(GLKMatrix4)parentModelMatrix ViewMatrix:(GLKMatrix4)parentViewMatrix;
 -(void)updateWithDelta:(NSTimeInterval)dt;
 
 @end

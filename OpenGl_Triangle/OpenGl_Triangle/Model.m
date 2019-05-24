@@ -74,16 +74,17 @@
 -(void)render
 {
     
-    _shader.modelViewMatrix = [self modelMatrix];
+    _shader.modelMatrix = [self modelMatrix];
     [_shader useProgram];
     
     glBindVertexArray(_VAO);
     glDrawElements(GL_TRIANGLES, _indexCount, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
--(void)renderWithParentModelViewMatrix:(GLKMatrix4)parentModelViewMatrix{
-    GLKMatrix4 modelViewMatrix = GLKMatrix4Multiply(parentModelViewMatrix, [self modelMatrix]);
-    _shader.modelViewMatrix = modelViewMatrix;
+-(void)renderWithParentModelMatrix:(GLKMatrix4)parentModelMatrix ViewMatrix:(GLKMatrix4)parentViewMatrix{
+    GLKMatrix4 modelMatrix = GLKMatrix4Multiply(parentModelMatrix, [self modelMatrix]);
+    _shader.modelMatrix = modelMatrix;
+    _shader.viewMatrix = parentViewMatrix;
     
     [_shader useProgram];
     

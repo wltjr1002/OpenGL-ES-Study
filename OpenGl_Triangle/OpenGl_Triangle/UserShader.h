@@ -13,7 +13,8 @@
 
 @interface UserShader : NSObject
 
-@property (nonatomic, assign) GLKMatrix4 modelViewMatrix;
+@property (nonatomic, assign) GLKMatrix4 modelMatrix;
+@property (nonatomic, assign) GLKMatrix4 viewMatrix;
 @property (nonatomic, assign) GLKMatrix4 projectionMatrix;
 
 - (id) init;

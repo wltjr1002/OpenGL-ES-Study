@@ -1,5 +1,6 @@
 #version 300 es
-uniform highp mat4 u_ModelViewMatrix;
+uniform highp mat4 u_ModelMatrix;
+uniform highp mat4 u_ViewMatrix;
 uniform highp mat4 u_ProjectionMatrix;
 
 layout (location = 0) in vec3 position;
@@ -8,9 +9,12 @@ layout (location = 2) in vec3 normal;
 
 out vec3 fcolor;
 out vec3 fnormal;
+out vec3 fposition;
 
 void main(){
-    gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * vec4(position, 1.0f);
+    highp mat4 ModelViewMatrix = inverse(u_ViewMatrix) * u_ModelMatrix;
+    gl_Position = u_ProjectionMatrix * ModelViewMatrix * vec4(position, 1.0f);
     fcolor = vcolor;
-    fnormal = (u_ModelViewMatrix * vec4(normal, 0.0f)).xyz;
+    fnormal = (ModelViewMatrix * vec4(normal, 0.0f)).xyz;
+    fposition = (ModelViewMatrix * vec4(position, 1.0f)).xyz;
 }

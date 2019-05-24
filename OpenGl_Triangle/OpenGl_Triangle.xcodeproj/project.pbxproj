@@ -13,6 +13,7 @@
 		EB6C1B3F2293EB75009820AA /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6C1B3E2293EB75009820AA /* Model.m */; };
 		EB6C1B432293F210009820AA /* Square.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6C1B422293F210009820AA /* Square.m */; };
 		EB713D2A229688C000E44852 /* Cube.m in Sources */ = {isa = PBXBuildFile; fileRef = EB713D29229688C000E44852 /* Cube.m */; };
+		EB8A86582297C151003F2BEB /* chCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8A86572297C151003F2BEB /* chCamera.m */; };
 		EBCB61B22282E4A800CA8706 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB61B12282E4A800CA8706 /* AppDelegate.m */; };
 		EBCB61B52282E4A800CA8706 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCB61B42282E4A800CA8706 /* ViewController.m */; };
 		EBCB61B82282E4A800CA8706 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBCB61B62282E4A800CA8706 /* Main.storyboard */; };
@@ -36,6 +37,8 @@
 		EB6C1B422293F210009820AA /* Square.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Square.m; sourceTree = "<group>"; };
 		EB713D28229688C000E44852 /* Cube.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cube.h; sourceTree = "<group>"; };
 		EB713D29229688C000E44852 /* Cube.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cube.m; sourceTree = "<group>"; };
+		EB8A86562297C151003F2BEB /* chCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chCamera.h; sourceTree = "<group>"; };
+		EB8A86572297C151003F2BEB /* chCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chCamera.m; sourceTree = "<group>"; };
 		EBCB61AD2282E4A800CA8706 /* OpenGl_Triangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGl_Triangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBCB61B02282E4A800CA8706 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EBCB61B12282E4A800CA8706 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -96,6 +99,8 @@
 				EB6C1B422293F210009820AA /* Square.m */,
 				EB713D28229688C000E44852 /* Cube.h */,
 				EB713D29229688C000E44852 /* Cube.m */,
+				EB8A86562297C151003F2BEB /* chCamera.h */,
+				EB8A86572297C151003F2BEB /* chCamera.m */,
 				EBCB61B02282E4A800CA8706 /* AppDelegate.h */,
 				EBCB61B12282E4A800CA8706 /* AppDelegate.m */,
 				EBCB61B32282E4A800CA8706 /* ViewController.h */,
@@ -192,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB6C1B432293F210009820AA /* Square.m in Sources */,
+				EB8A86582297C151003F2BEB /* chCamera.m in Sources */,
 				EBCB61B52282E4A800CA8706 /* ViewController.m in Sources */,
 				EB6C1B0222939EE6009820AA /* UserShader.m in Sources */,
 				EBCB61C02282E4A900CA8706 /* main.m in Sources */,

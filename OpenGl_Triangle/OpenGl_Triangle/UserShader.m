@@ -11,11 +11,14 @@
 @implementation UserShader
 {
     GLuint programHandle;
-    GLuint modelViewMatrix_u;
+    GLuint modelMatrix_u;
+    GLuint viewMatrix_u;
     GLuint projectionMatrix_u;
     GLuint lightColor_u;
     GLuint lightAmbientIntensity_u;
     GLuint lightDiffuseIntensity_u;
+    GLuint lightSpecularIntensity_u;
+    GLuint Shininess_u;
     GLuint lightDirection_u;
 }
 
@@ -34,12 +37,15 @@
 - (void) useProgram
 {
     glUseProgram(programHandle);
-    glUniformMatrix4fv(modelViewMatrix_u, 1, 0, self.modelViewMatrix.m);
+    glUniformMatrix4fv(modelMatrix_u, 1, 0, self.modelMatrix.m);
+    glUniformMatrix4fv(viewMatrix_u, 1, 0, self.viewMatrix.m);
     glUniformMatrix4fv(projectionMatrix_u, 1, 0, self.projectionMatrix.m);
     
     glUniform3f(lightColor_u, 1, 1, 1);
     glUniform1f(lightAmbientIntensity_u, 0.8);
     glUniform1f(lightDiffuseIntensity_u, 0.8);
+    glUniform1f(lightSpecularIntensity_u, 12.0);
+    glUniform1f(Shininess_u, 32.0);
     GLKVector3 lightDirection = GLKVector3Normalize(GLKVector3Make(1, -2, -1));
     glUniform3f(lightDirection_u, lightDirection.x, lightDirection.y, lightDirection.z);
     
@@ -66,14 +72,16 @@
         exit(1);
     }
     
-    self.modelViewMatrix = GLKMatrix4Identity;
-    modelViewMatrix_u = glGetUniformLocation(programHandle, "u_ModelViewMatrix");
+    self.modelMatrix = GLKMatrix4Identity;
+    modelMatrix_u = glGetUniformLocation(programHandle, "u_ModelMatrix");
+    viewMatrix_u = glGetUniformLocation(programHandle, "u_ViewMatrix");
     projectionMatrix_u = glGetUniformLocation(programHandle, "u_ProjectionMatrix");
     lightColor_u = glGetUniformLocation(programHandle, "u_Light.Color");
     lightAmbientIntensity_u = glGetUniformLocation(programHandle, "u_Light.AmbientIntensity");
     lightDiffuseIntensity_u = glGetUniformLocation(programHandle, "u_Light.DiffuseIntensity");
+    lightSpecularIntensity_u = glGetUniformLocation(programHandle, "u_SpecularIntensity");
+    Shininess_u = glGetUniformLocation(programHandle, "u_Shininess");
     lightDirection_u = glGetUniformLocation(programHandle, "u_Light.Direction");
-    
     
 }
 
