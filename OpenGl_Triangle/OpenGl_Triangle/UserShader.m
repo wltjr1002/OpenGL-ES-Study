@@ -15,6 +15,8 @@
     GLuint projectionMatrix_u;
     GLuint lightColor_u;
     GLuint lightAmbientIntensity_u;
+    GLuint lightDiffuseIntensity_u;
+    GLuint lightDirection_u;
 }
 
 - (id) init
@@ -37,6 +39,10 @@
     
     glUniform3f(lightColor_u, 1, 1, 1);
     glUniform1f(lightAmbientIntensity_u, 0.8);
+    glUniform1f(lightDiffuseIntensity_u, 0.8);
+    GLKVector3 lightDirection = GLKVector3Normalize(GLKVector3Make(1, -2, -1));
+    glUniform3f(lightDirection_u, lightDirection.x, lightDirection.y, lightDirection.z);
+    
 }
 
 - (void)prepareProgramWithVertexShader:(NSString *)vsPath FragmentShader:(NSString *)fsPath
@@ -65,6 +71,8 @@
     projectionMatrix_u = glGetUniformLocation(programHandle, "u_ProjectionMatrix");
     lightColor_u = glGetUniformLocation(programHandle, "u_Light.Color");
     lightAmbientIntensity_u = glGetUniformLocation(programHandle, "u_Light.AmbientIntensity");
+    lightDiffuseIntensity_u = glGetUniformLocation(programHandle, "u_Light.DiffuseIntensity");
+    lightDirection_u = glGetUniformLocation(programHandle, "u_Light.Direction");
     
     
 }

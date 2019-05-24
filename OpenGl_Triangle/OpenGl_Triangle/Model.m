@@ -52,12 +52,15 @@
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, positionCoords));
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, colorCoords));
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, normal));
     
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     
     return self;
 }
+
 -(GLKMatrix4)modelMatrix
 {
     GLKMatrix4 modelMatrix = GLKMatrix4Identity;

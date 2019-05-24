@@ -22,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) float rotationZ;
 @property (nonatomic) float scale;
 
--(instancetype) initWithName:(char *)name shader:(UserShader *)shader vertices:(SceneVertex *)vertiecs vertexCount:(unsigned int)count indices:(int *)indices indexCount:(unsigned int)indexCount;
+-(instancetype) initWithName:(char *)name shader:(UserShader *)shader vertices:(SceneVertex *)vertices vertexCount:(unsigned int)count indices:(int *)indices indexCount:(unsigned int)indexCount;
+//-(instancetype) initWithName:(char *)name shader:(UserShader *)shader vertices:(SceneVertex *)vertices vertexCount:(unsigned int)count;
 
 -(void)render;
 -(void)renderWithParentModelViewMatrix:(GLKMatrix4)parentModelViewMatrix;
