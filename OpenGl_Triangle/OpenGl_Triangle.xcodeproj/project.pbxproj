@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB05874122BB7EF9002F749B /* portalTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EB05874022BB7EF9002F749B /* portalTexture.jpg */; };
+		EB4CE9BC22B9CAC0003E2425 /* texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EB4CE9BB22B9CAC0003E2425 /* texture.jpg */; };
 		EB6C1B0122939EE6009820AA /* VertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EB6C1AFD22939EE6009820AA /* VertexShader.glsl */; };
 		EB6C1B0222939EE6009820AA /* UserShader.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6C1AFE22939EE6009820AA /* UserShader.m */; };
 		EB6C1B0322939EE6009820AA /* FragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EB6C1B0022939EE6009820AA /* FragmentShader.glsl */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB05874022BB7EF9002F749B /* portalTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = portalTexture.jpg; sourceTree = "<group>"; };
+		EB4CE9BB22B9CAC0003E2425 /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
 		EB6C1AFD22939EE6009820AA /* VertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexShader.glsl; sourceTree = "<group>"; };
 		EB6C1AFE22939EE6009820AA /* UserShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserShader.m; sourceTree = "<group>"; };
 		EB6C1AFF22939EE6009820AA /* UserShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserShader.h; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		EBCB61AF2282E4A800CA8706 /* OpenGl_Triangle */ = {
 			isa = PBXGroup;
 			children = (
+				EB4CE9BB22B9CAC0003E2425 /* texture.jpg */,
+				EB05874022BB7EF9002F749B /* portalTexture.jpg */,
 				EB6C1AFD22939EE6009820AA /* VertexShader.glsl */,
 				EB6C1B0022939EE6009820AA /* FragmentShader.glsl */,
 				EB6C1AFF22939EE6009820AA /* UserShader.h */,
@@ -184,7 +190,9 @@
 				EBCB61BD2282E4A900CA8706 /* LaunchScreen.storyboard in Resources */,
 				EBCB61BA2282E4A900CA8706 /* Assets.xcassets in Resources */,
 				EB6C1B0322939EE6009820AA /* FragmentShader.glsl in Resources */,
+				EB4CE9BC22B9CAC0003E2425 /* texture.jpg in Resources */,
 				EBCB61B82282E4A800CA8706 /* Main.storyboard in Resources */,
+				EB05874122BB7EF9002F749B /* portalTexture.jpg in Resources */,
 				EB6C1B0122939EE6009820AA /* VertexShader.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

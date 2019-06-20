@@ -49,12 +49,15 @@
     
     // Set Vertex Arrtibute Array
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, positionCoords));
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, colorCoords));
     glEnableVertexAttribArray(2);
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, positionCoords));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, colorCoords));
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, normal));
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, textureCoords));
     
+    // Unbinding
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     
@@ -73,20 +76,21 @@
 }
 -(void)render
 {
-    
     _shader.modelMatrix = [self modelMatrix];
     [_shader useProgram];
+    
     
     glBindVertexArray(_VAO);
     glDrawElements(GL_TRIANGLES, _indexCount, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
+
 -(void)renderWithParentModelMatrix:(GLKMatrix4)parentModelMatrix ViewMatrix:(GLKMatrix4)parentViewMatrix{
     GLKMatrix4 modelMatrix = GLKMatrix4Multiply(parentModelMatrix, [self modelMatrix]);
     _shader.modelMatrix = modelMatrix;
     _shader.viewMatrix = parentViewMatrix;
     
-    [_shader useProgram];
+    [_shader useProgramWithTexture:@"portalTexture.jpg"];
     
     glBindVertexArray(_VAO);
     glDrawElements(GL_TRIANGLES, _indexCount, GL_UNSIGNED_INT, 0);

@@ -21,6 +21,7 @@
 - (id) initWithVertexShaderPath:(NSString *)vsPath FragmentShaderPath:(NSString *)fsPath;
 
 - (void) useProgram;
+- (void) useProgramWithTexture:(NSString *)textureName;
 
 @end
 

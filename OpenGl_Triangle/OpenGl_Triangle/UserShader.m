@@ -20,6 +20,7 @@
     GLuint lightSpecularIntensity_u;
     GLuint Shininess_u;
     GLuint lightDirection_u;
+    GLuint texture_u;
 }
 
 - (id) init
@@ -42,13 +43,67 @@
     glUniformMatrix4fv(projectionMatrix_u, 1, 0, self.projectionMatrix.m);
     
     glUniform3f(lightColor_u, 1, 1, 1);
-    glUniform1f(lightAmbientIntensity_u, 0.8);
-    glUniform1f(lightDiffuseIntensity_u, 0.8);
-    glUniform1f(lightSpecularIntensity_u, 12.0);
-    glUniform1f(Shininess_u, 32.0);
+    glUniform1f(lightAmbientIntensity_u, 0.5);
+    glUniform1f(lightDiffuseIntensity_u, 0.5);
+    glUniform1f(lightSpecularIntensity_u, 3.0);
+    glUniform1f(Shininess_u, 128.0);
     GLKVector3 lightDirection = GLKVector3Normalize(GLKVector3Make(1, -2, -1));
     glUniform3f(lightDirection_u, lightDirection.x, lightDirection.y, lightDirection.z);
+}
+
+- (void) useProgramWithTexture:(NSString *)textureName
+{
+    // Other Settings
+    [self useProgram];
     
+    //Texture Settings
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
+    GLuint _texture = [self setupTexture:textureName];
+    texture_u = glGetUniformLocation(programHandle, "u_texture");
+    
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, _texture);
+    glUniform1i(texture_u, 0);
+}
+
+- (GLuint)setupTexture:(NSString *)fileName {
+    // 1
+    CGImageRef spriteImage = [UIImage imageNamed:fileName].CGImage;
+    if (!spriteImage) {
+        NSLog(@"Failed to load image %@", fileName);
+        exit(1);
+    }
+    
+    // 2
+    GLsizei width = (GLsizei)CGImageGetWidth(spriteImage);
+    GLsizei height = (GLsizei)CGImageGetHeight(spriteImage);
+    
+    GLubyte * spriteData = (GLubyte *) calloc(width*height*4, sizeof(GLubyte));
+    
+    CGContextRef spriteContext = CGBitmapContextCreate(spriteData, width, height, 8, width*4,
+                                                       CGImageGetColorSpace(spriteImage), kCGImageAlphaPremultipliedLast);
+    
+    // 3
+    CGContextDrawImage(spriteContext, CGRectMake(0, 0, width, height), spriteImage);
+    
+    CGContextRelease(spriteContext);
+    
+    // 4
+    GLuint texName;
+    glGenTextures(1, &texName);
+    glBindTexture(GL_TEXTURE_2D, texName);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
+    
+    
+    free(spriteData);
+    return texName;
 }
 
 - (void)prepareProgramWithVertexShader:(NSString *)vsPath FragmentShader:(NSString *)fsPath

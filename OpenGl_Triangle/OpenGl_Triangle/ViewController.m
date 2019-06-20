@@ -22,6 +22,11 @@
 {
     UserShader * _shader;
     Cube * _cube;
+    Cube * _cube2;
+    Cube * _cube3;
+    Cube * _cube4;
+    Cube * _cube5;
+    Cube * _cube6;
     
     chCamera * _camera;
     GLKMatrix4 viewMatrix;
@@ -44,6 +49,8 @@
     
     //scene setting
     _cube = [[Cube alloc] initWithShader:_shader];
+    
+    _cube.position = GLKVector3Make(0, 0, 5);
 }
 
 - (void)viewDidLoad {
@@ -68,12 +75,24 @@
     [_camera GetViewMatrix: &viewMatrix];
     _shader.viewMatrix = viewMatrix;
     
-    GLKMatrix4 modelMatrix = GLKMatrix4MakeTranslation(0, 0, -5);
+    GLKMatrix4 modelMatrix = GLKMatrix4MakeTranslation(0, 0, -15);
     [_cube renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
+    [_cube2 renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
+    [_cube3 renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
+    [_cube4 renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
+    [_cube5 renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
+    [_cube6 renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
+    
 }
 
 -(void)update{
     [_cube updateWithDelta:self.timeSinceLastUpdate];
+    [_cube2 updateWithDelta:self.timeSinceLastUpdate];
+    [_cube3 updateWithDelta:self.timeSinceLastUpdate];
+    [_cube4 updateWithDelta:self.timeSinceLastUpdate];
+    [_cube5 updateWithDelta:self.timeSinceLastUpdate];
+    [_cube6 updateWithDelta:self.timeSinceLastUpdate];
+    
 }
 // Input Methods
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
