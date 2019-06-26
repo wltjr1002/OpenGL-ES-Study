@@ -66,18 +66,18 @@ static int indices[] =
 
 
 @implementation Cube
-
+    
 -(instancetype)initWithShader:(UserShader *)shader{
     if(self = [super initWithName:"cube" shader:shader vertices:vertices vertexCount:sizeof(vertices)/sizeof(vertices[0]) indices:indices indexCount:sizeof(indices)/sizeof(indices[0])])
     {
-        
     }
     return self;
 }
-
--(void)updateWithDelta:(NSTimeInterval)dt{
-    self.rotationZ += M_PI * dt * 0.1;
-    self.rotationY += M_PI * dt * 0.1;
-    self.rotationX += M_PI * dt * 0.01f;
-}
-@end
+        
+-(void)updateWithDelta:(NSTimeInterval)dt
+    {
+        self.rotationZ += M_PI * dt * 0.1;
+        self.rotationY += M_PI * dt * 0.1;
+        self.rotationX += M_PI * dt * 0.01f;
+    }
+    @end

@@ -8,6 +8,17 @@ struct Light{
     lowp vec3 Direction;
 };
 uniform Light u_Light;
+
+/*
+struct Material{
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+}
+uniform Material u_Material;
+*/
+
 uniform highp float u_SpecularIntensity;
 uniform highp float u_Shininess;
 
@@ -35,5 +46,5 @@ void main(){
     lowp float SpecularFactor = pow(max(0.0, -dot(Reflection,Eye)),u_Shininess);
     lowp vec4 SpecularColor = vec4(u_Light.Color * u_SpecularIntensity * SpecularFactor, 1.0);
     
-    out_color = texture(u_texture, ftexCoord) * (AmbientColor + DiffuseColor + SpecularColor);
+    out_color = vec4(fcolor, 1.0) * (AmbientColor + DiffuseColor + SpecularColor);
 }

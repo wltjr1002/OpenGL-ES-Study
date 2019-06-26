@@ -60,16 +60,16 @@
     float velocity = MovementSpeed * dt;
     
     if (direction == FORWARD)
-        self.Position = GLKVector3Add(self.Position, GLKVector3MultiplyScalar(self.Front, velocity));
+        self.Position = GLKVector3Add(self.Position, GLKVector3MultiplyScalar(self.Front, -velocity));
     
     if (direction == BACKWARD)
         self.Position = GLKVector3Add(self.Position, GLKVector3MultiplyScalar(self.Front, velocity));
     
     if (direction == LEFT)
-        self.Position = GLKVector3Subtract(self.Position, GLKVector3MultiplyScalar(self.Right, velocity));
+        self.Position = GLKVector3Add(self.Position, GLKVector3MultiplyScalar(self.Right, velocity));
     
     if (direction == RIGHT)
-        self.Position = GLKVector3Add(self.Position, GLKVector3MultiplyScalar(self.Right, velocity));
+        self.Position = GLKVector3Add(self.Position, GLKVector3MultiplyScalar(self.Right, -velocity));
 }
 
 -(void) ProcessMouseMovement:(bool)preventPitch Xoffset:(float)xo Yoffset:(float)yo

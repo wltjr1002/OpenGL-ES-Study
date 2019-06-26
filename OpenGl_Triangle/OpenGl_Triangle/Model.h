@@ -23,10 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) float scale;
 
 -(instancetype) initWithName:(char *)name shader:(UserShader *)shader vertices:(SceneVertex *)vertices vertexCount:(unsigned int)count indices:(int *)indices indexCount:(unsigned int)indexCount;
-//-(instancetype) initWithName:(char *)name shader:(UserShader *)shader vertices:(SceneVertex *)vertices vertexCount:(unsigned int)count;
+-(instancetype) initWithName:(char *)name shader:(UserShader *)shader vertices:(SceneVertex *)vertices vertexCount:(unsigned int)count;
 
 -(void)render;
--(void)renderWithParentModelMatrix:(GLKMatrix4)parentModelMatrix ViewMatrix:(GLKMatrix4)parentViewMatrix;
+-(void)renderWithParentModelMatrix:(GLKMatrix4)parentModelMatrix;
+-(void)renderWithTexture:(NSString *)filename;
 -(void)updateWithDelta:(NSTimeInterval)dt;
 
 @end

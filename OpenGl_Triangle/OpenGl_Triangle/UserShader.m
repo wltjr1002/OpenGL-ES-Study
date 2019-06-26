@@ -30,8 +30,10 @@
 
 - (id) initWithVertexShaderPath:(NSString *)vsPath FragmentShaderPath:(NSString *)fsPath
 {
-    self = [super init];
-    [self prepareProgramWithVertexShader:vsPath FragmentShader:fsPath];
+    if(self = [super init])
+    {
+        [self prepareProgramWithVertexShader:vsPath FragmentShader:fsPath];
+    } 
     return self;
 }
 
@@ -53,32 +55,36 @@
 
 - (void) useProgramWithTexture:(NSString *)textureName
 {
-    // Other Settings
     [self useProgram];
-    
-    //Texture Settings
+    [self useTexture:textureName];
+}
+
+- (void) useTexture:(NSString *)fileName
+{
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
-    GLuint _texture = [self setupTexture:textureName];
+    GLuint _texture = [self setupTexture:fileName];
     texture_u = glGetUniformLocation(programHandle, "u_texture");
     
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _texture);
     glUniform1i(texture_u, 0);
-}
 
+}
+    
 - (GLuint)setupTexture:(NSString *)fileName {
-    // 1
+    // Load image
     CGImageRef spriteImage = [UIImage imageNamed:fileName].CGImage;
-    if (!spriteImage) {
+    if (!spriteImage)
+    {
         NSLog(@"Failed to load image %@", fileName);
         exit(1);
     }
     
-    // 2
+    // Set image context to copy data
     GLsizei width = (GLsizei)CGImageGetWidth(spriteImage);
     GLsizei height = (GLsizei)CGImageGetHeight(spriteImage);
     
@@ -87,12 +93,12 @@
     CGContextRef spriteContext = CGBitmapContextCreate(spriteData, width, height, 8, width*4,
                                                        CGImageGetColorSpace(spriteImage), kCGImageAlphaPremultipliedLast);
     
-    // 3
+    // Copy image data into the context
     CGContextDrawImage(spriteContext, CGRectMake(0, 0, width, height), spriteImage);
     
     CGContextRelease(spriteContext);
     
-    // 4
+    // Bind texture into GL_TEXTURE_2D
     GLuint texName;
     glGenTextures(1, &texName);
     glBindTexture(GL_TEXTURE_2D, texName);

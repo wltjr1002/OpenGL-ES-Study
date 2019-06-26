@@ -9,8 +9,8 @@
 #import "ViewController.h"
 #import "UserShader.h"
 #import <OpenGLES/ES3/gl.h>
-#import "Square.h"
 #import "Cube.h"
+#import "ObjectModel.h"
 #import "chCamera.h"
 
 
@@ -22,17 +22,28 @@
 {
     UserShader * _shader;
     Cube * _cube;
-    Cube * _cube2;
-    Cube * _cube3;
-    Cube * _cube4;
-    Cube * _cube5;
-    Cube * _cube6;
+    ObjectModel * _objModel;
     
     chCamera * _camera;
     GLKMatrix4 viewMatrix;
     
+    __weak IBOutlet UIButton *Button_Right;
+    
     int lastPosX;
     int lastPosY;
+}
+
+- (IBAction)leftPressed:(id)sender {
+    [_camera ProcessKeyboard:LEFT deltaTime:0.016f];
+}
+- (IBAction)rightPressed:(id)sender {
+    [_camera ProcessKeyboard:RIGHT deltaTime:0.016f];
+}
+- (IBAction)upPressed:(id)sender {
+    [_camera ProcessKeyboard:FORWARD deltaTime:0.01f];
+}
+- (IBAction)downPressed:(id)sender {
+    [_camera ProcessKeyboard:BACKWARD deltaTime:0.01f];
 }
 
 - (void) setupSceneWithView:(GLKView *)view
@@ -48,9 +59,11 @@
     
     
     //scene setting
-    _cube = [[Cube alloc] initWithShader:_shader];
+    //_cube = [[Cube alloc] initWithShader:_shader];
+    _objModel = [[ObjectModel alloc] initWithShader:_shader Filename:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Model/magnolia.obj"];
     
-    _cube.position = GLKVector3Make(0, 0, 5);
+    //_cube.position = GLKVector3Make(0, 0, -5);
+    _objModel.position = GLKVector3Make(0, 0, -15);
 }
 
 - (void)viewDidLoad {
@@ -67,7 +80,7 @@
 
 -(void)glkView:(GLKView *)view drawInRect:(CGRect)rect{
     
-    glClearColor(0, 144.0/255.0, 55.0/255.0, 1.0f);
+    glClearColor(200.0/255.0, 200.0/255.0, 200.0/255.0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -75,24 +88,12 @@
     [_camera GetViewMatrix: &viewMatrix];
     _shader.viewMatrix = viewMatrix;
     
-    GLKMatrix4 modelMatrix = GLKMatrix4MakeTranslation(0, 0, -15);
-    [_cube renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
-    [_cube2 renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
-    [_cube3 renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
-    [_cube4 renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
-    [_cube5 renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
-    [_cube6 renderWithParentModelMatrix:modelMatrix ViewMatrix:viewMatrix];
+    [_objModel renderWithParentModelMatrix:GLKMatrix4Scale(GLKMatrix4Identity, 0.1f, 0.1f, 0.1f)];
     
 }
 
 -(void)update{
-    [_cube updateWithDelta:self.timeSinceLastUpdate];
-    [_cube2 updateWithDelta:self.timeSinceLastUpdate];
-    [_cube3 updateWithDelta:self.timeSinceLastUpdate];
-    [_cube4 updateWithDelta:self.timeSinceLastUpdate];
-    [_cube5 updateWithDelta:self.timeSinceLastUpdate];
-    [_cube6 updateWithDelta:self.timeSinceLastUpdate];
-    
+    [_objModel updateWithDelta:self.timeSinceLastUpdate];
 }
 // Input Methods
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
