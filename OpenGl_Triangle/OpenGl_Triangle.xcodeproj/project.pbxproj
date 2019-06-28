@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		EB05874122BB7EF9002F749B /* portalTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EB05874022BB7EF9002F749B /* portalTexture.jpg */; };
+		EB2B3B1122C47E6200C146D8 /* SkyBoxVS.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EB2B3B1022C47E6200C146D8 /* SkyBoxVS.glsl */; };
+		EB2B3B1322C47E7C00C146D8 /* SkyBoxFS.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EB2B3B1222C47E7C00C146D8 /* SkyBoxFS.glsl */; };
+		EB2B3B1A22C487E700C146D8 /* lake1_lf.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EB2B3B1422C487E700C146D8 /* lake1_lf.JPG */; };
+		EB2B3B1B22C487E700C146D8 /* lake1_rt.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EB2B3B1522C487E700C146D8 /* lake1_rt.JPG */; };
+		EB2B3B1C22C487E700C146D8 /* lake1_bk.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EB2B3B1622C487E700C146D8 /* lake1_bk.JPG */; };
+		EB2B3B1D22C487E700C146D8 /* lake1_dn.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EB2B3B1722C487E700C146D8 /* lake1_dn.JPG */; };
+		EB2B3B1E22C487E700C146D8 /* lake1_ft.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EB2B3B1822C487E700C146D8 /* lake1_ft.JPG */; };
+		EB2B3B1F22C487E700C146D8 /* lake1_up.JPG in Resources */ = {isa = PBXBuildFile; fileRef = EB2B3B1922C487E700C146D8 /* lake1_up.JPG */; };
+		EB2B3B2222C4898E00C146D8 /* Skybox.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2B3B2122C4898E00C146D8 /* Skybox.m */; };
+		EB4CA16D22C4A7B700992839 /* trumpet.obj in Resources */ = {isa = PBXBuildFile; fileRef = EB4CA16C22C4A7B700992839 /* trumpet.obj */; };
+		EB4CA16F22C4A8A000992839 /* skyscraper.obj in Resources */ = {isa = PBXBuildFile; fileRef = EB4CA16E22C4A8A000992839 /* skyscraper.obj */; };
 		EB4CE9BC22B9CAC0003E2425 /* texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EB4CE9BB22B9CAC0003E2425 /* texture.jpg */; };
 		EB6C1B0122939EE6009820AA /* VertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EB6C1AFD22939EE6009820AA /* VertexShader.glsl */; };
 		EB6C1B0222939EE6009820AA /* UserShader.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6C1AFE22939EE6009820AA /* UserShader.m */; };
@@ -34,6 +45,18 @@
 
 /* Begin PBXFileReference section */
 		EB05874022BB7EF9002F749B /* portalTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = portalTexture.jpg; sourceTree = "<group>"; };
+		EB2B3B1022C47E6200C146D8 /* SkyBoxVS.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = SkyBoxVS.glsl; sourceTree = "<group>"; };
+		EB2B3B1222C47E7C00C146D8 /* SkyBoxFS.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = SkyBoxFS.glsl; sourceTree = "<group>"; };
+		EB2B3B1422C487E700C146D8 /* lake1_lf.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lake1_lf.JPG; sourceTree = "<group>"; };
+		EB2B3B1522C487E700C146D8 /* lake1_rt.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lake1_rt.JPG; sourceTree = "<group>"; };
+		EB2B3B1622C487E700C146D8 /* lake1_bk.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lake1_bk.JPG; sourceTree = "<group>"; };
+		EB2B3B1722C487E700C146D8 /* lake1_dn.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lake1_dn.JPG; sourceTree = "<group>"; };
+		EB2B3B1822C487E700C146D8 /* lake1_ft.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lake1_ft.JPG; sourceTree = "<group>"; };
+		EB2B3B1922C487E700C146D8 /* lake1_up.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lake1_up.JPG; sourceTree = "<group>"; };
+		EB2B3B2022C4898E00C146D8 /* Skybox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Skybox.h; sourceTree = "<group>"; };
+		EB2B3B2122C4898E00C146D8 /* Skybox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Skybox.m; sourceTree = "<group>"; };
+		EB4CA16C22C4A7B700992839 /* trumpet.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trumpet.obj; sourceTree = "<group>"; };
+		EB4CA16E22C4A8A000992839 /* skyscraper.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skyscraper.obj; sourceTree = "<group>"; };
 		EB4CE9BB22B9CAC0003E2425 /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
 		EB6C1AFD22939EE6009820AA /* VertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexShader.glsl; sourceTree = "<group>"; };
 		EB6C1AFE22939EE6009820AA /* UserShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserShader.m; sourceTree = "<group>"; };
@@ -83,11 +106,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB2B3B0F22C467CB00C146D8 /* Texture */ = {
+			isa = PBXGroup;
+			children = (
+				EB2B3B1622C487E700C146D8 /* lake1_bk.JPG */,
+				EB2B3B1722C487E700C146D8 /* lake1_dn.JPG */,
+				EB2B3B1822C487E700C146D8 /* lake1_ft.JPG */,
+				EB2B3B1422C487E700C146D8 /* lake1_lf.JPG */,
+				EB2B3B1522C487E700C146D8 /* lake1_rt.JPG */,
+				EB2B3B1922C487E700C146D8 /* lake1_up.JPG */,
+				EB4CE9BB22B9CAC0003E2425 /* texture.jpg */,
+				EB05874022BB7EF9002F749B /* portalTexture.jpg */,
+			);
+			path = Texture;
+			sourceTree = "<group>";
+		};
 		EBA7F74222C34822007C6DF1 /* Shader */ = {
 			isa = PBXGroup;
 			children = (
 				EB6C1AFD22939EE6009820AA /* VertexShader.glsl */,
 				EB6C1B0022939EE6009820AA /* FragmentShader.glsl */,
+				EB2B3B1022C47E6200C146D8 /* SkyBoxVS.glsl */,
+				EB2B3B1222C47E7C00C146D8 /* SkyBoxFS.glsl */,
 				EB6C1AFF22939EE6009820AA /* UserShader.h */,
 				EB6C1AFE22939EE6009820AA /* UserShader.m */,
 				EB6C1B402293EBAF009820AA /* SceneVertex.h */,
@@ -99,6 +139,8 @@
 				EB713D29229688C000E44852 /* Cube.m */,
 				EBD1F9B222C0A51800271E02 /* ObjParser.h */,
 				EBD1F9B322C0A51800271E02 /* ObjParser.m */,
+				EB2B3B2022C4898E00C146D8 /* Skybox.h */,
+				EB2B3B2122C4898E00C146D8 /* Skybox.m */,
 			);
 			name = Shader;
 			sourceTree = "<group>";
@@ -106,6 +148,8 @@
 		EBA7F74722C3651A007C6DF1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EB4CA16E22C4A8A000992839 /* skyscraper.obj */,
+				EB4CA16C22C4A7B700992839 /* trumpet.obj */,
 				EBA7F74322C34F59007C6DF1 /* dodecahedron.txt */,
 				EBA7F74822C3658C007C6DF1 /* dodecahedron.obj */,
 				EBA7F74A22C37655007C6DF1 /* lamp.obj */,
@@ -134,10 +178,9 @@
 		EBCB61AF2282E4A800CA8706 /* OpenGl_Triangle */ = {
 			isa = PBXGroup;
 			children = (
+				EB2B3B0F22C467CB00C146D8 /* Texture */,
 				EBA7F74722C3651A007C6DF1 /* Model */,
 				EBA7F74222C34822007C6DF1 /* Shader */,
-				EB4CE9BB22B9CAC0003E2425 /* texture.jpg */,
-				EB05874022BB7EF9002F749B /* portalTexture.jpg */,
 				EB8A86562297C151003F2BEB /* chCamera.h */,
 				EB8A86572297C151003F2BEB /* chCamera.m */,
 				EBCB61B02282E4A800CA8706 /* AppDelegate.h */,
@@ -220,17 +263,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB4CA16F22C4A8A000992839 /* skyscraper.obj in Resources */,
 				EBCB61BD2282E4A900CA8706 /* LaunchScreen.storyboard in Resources */,
 				EBA7F74922C3658C007C6DF1 /* dodecahedron.obj in Resources */,
 				EBCB61BA2282E4A900CA8706 /* Assets.xcassets in Resources */,
 				EB6C1B0322939EE6009820AA /* FragmentShader.glsl in Resources */,
+				EB2B3B1E22C487E700C146D8 /* lake1_ft.JPG in Resources */,
 				EBA7F74B22C37655007C6DF1 /* lamp.obj in Resources */,
+				EB2B3B1C22C487E700C146D8 /* lake1_bk.JPG in Resources */,
+				EB2B3B1122C47E6200C146D8 /* SkyBoxVS.glsl in Resources */,
+				EB2B3B1A22C487E700C146D8 /* lake1_lf.JPG in Resources */,
+				EB2B3B1B22C487E700C146D8 /* lake1_rt.JPG in Resources */,
 				EB4CE9BC22B9CAC0003E2425 /* texture.jpg in Resources */,
 				EBCB61B82282E4A800CA8706 /* Main.storyboard in Resources */,
 				EBA7F74622C3650A007C6DF1 /* magnolia.obj in Resources */,
+				EB2B3B1D22C487E700C146D8 /* lake1_dn.JPG in Resources */,
+				EB2B3B1322C47E7C00C146D8 /* SkyBoxFS.glsl in Resources */,
 				EB05874122BB7EF9002F749B /* portalTexture.jpg in Resources */,
 				EBA7F74422C34F59007C6DF1 /* dodecahedron.txt in Resources */,
+				EB4CA16D22C4A7B700992839 /* trumpet.obj in Resources */,
 				EB6C1B0122939EE6009820AA /* VertexShader.glsl in Resources */,
+				EB2B3B1F22C487E700C146D8 /* lake1_up.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +301,7 @@
 				EBCB61B22282E4A800CA8706 /* AppDelegate.m in Sources */,
 				EBD1F9B422C0A51800271E02 /* ObjParser.m in Sources */,
 				EB6C1B3F2293EB75009820AA /* Model.m in Sources */,
+				EB2B3B2222C4898E00C146D8 /* Skybox.m in Sources */,
 				EBB466A322C1EE6F00AC460A /* ObjectModel.m in Sources */,
 				EB713D2A229688C000E44852 /* Cube.m in Sources */,
 			);

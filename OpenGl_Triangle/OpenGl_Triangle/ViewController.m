@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "UserShader.h"
 #import <OpenGLES/ES3/gl.h>
-#import "Cube.h"
+#import "Skybox.h"
 #import "ObjectModel.h"
 #import "chCamera.h"
 
@@ -18,11 +18,16 @@
 
 @end
 
+
 @implementation ViewController
 {
     UserShader * _shader;
-    Cube * _cube;
+    UserShader * _skyboxShader;
     ObjectModel * _objModel;
+    ObjectModel * _objModel2;
+    ObjectModel * _objModel3;
+    
+    Skybox * _skybox;
     
     chCamera * _camera;
     GLKMatrix4 viewMatrix;
@@ -50,7 +55,10 @@
 {
     //shader setting
     _shader = [[UserShader alloc] initWithVertexShaderPath:@"VertexShader.glsl" FragmentShaderPath:@"FragmentShader.glsl"];
-    _shader.projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(85.0), self.view.bounds.size.width/self.view.bounds.size.height, 1, 150);
+    //_skyboxShader = [[UserShader alloc] initWithVertexShaderPath:@"SkyBoxVS.glsl" FragmentShaderPath:@"SkyBoxFS.glsl"];
+    GLKMatrix4 projectionMat = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(85.0), self.view.bounds.size.width/self.view.bounds.size.height, 1, 150);
+    _shader.projectionMatrix = projectionMat;
+    //_skyboxShader.projectionMatrix = projectionMat;
     
     //camera setting
     _camera = [[chCamera alloc] init];
@@ -59,11 +67,14 @@
     
     
     //scene setting
-    //_cube = [[Cube alloc] initWithShader:_shader];
-    _objModel = [[ObjectModel alloc] initWithShader:_shader Filename:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Model/magnolia.obj"];
+    _objModel = [[ObjectModel alloc] initWithShader:_shader Filename:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Model/skyscraper.obj"];
+    _objModel2 = [[ObjectModel alloc] initWithShader:_shader Filename:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Model/lamp.obj"];
+    _objModel3 = [[ObjectModel alloc] initWithShader:_shader Filename:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Model/lamp.obj"];
+    //_skybox = [[Skybox alloc] initWithShader:_skyboxShader];
     
-    //_cube.position = GLKVector3Make(0, 0, -5);
-    _objModel.position = GLKVector3Make(0, 0, -15);
+    _objModel.position = GLKVector3Make(0, 0, -70);
+    _objModel2.position = GLKVector3Make(7, -2, -30);
+    _objModel3.position = GLKVector3Make(-7, -2, -30);
 }
 
 - (void)viewDidLoad {
@@ -82,13 +93,23 @@
     
     glClearColor(200.0/255.0, 200.0/255.0, 200.0/255.0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     
     [_camera GetViewMatrix: &viewMatrix];
     _shader.viewMatrix = viewMatrix;
     
-    [_objModel renderWithParentModelMatrix:GLKMatrix4Scale(GLKMatrix4Identity, 0.1f, 0.1f, 0.1f)];
+    //[_skybox render];
+    GLKVector3 ambient = GLKVector3Make(0.24725f, 0.1995f, 0.0745f);
+    GLKVector3 diffuse = GLKVector3Make(0.75164f, 0.60648f, 0.22648f);
+    GLKVector3 specular = GLKVector3Make(0.628281f, 0.555802f, 0.366065f);
+    float shininess = 0.4f;
+    
+    //[_objModel render];
+    [_objModel renderWithMaterialKa:ambient Kd:diffuse Ks:specular Shininess:shininess];
+    [_objModel2 render];
+    [_objModel3 render];
     
 }
 

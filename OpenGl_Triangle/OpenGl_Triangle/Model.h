@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)render;
 -(void)renderWithParentModelMatrix:(GLKMatrix4)parentModelMatrix;
 -(void)renderWithTexture:(NSString *)filename;
+-(void)renderWithMaterialKa:(GLKVector3)ambient Kd:(GLKVector3)diffuse Ks:(GLKVector3)specular Shininess:(float)shininess;
 -(void)updateWithDelta:(NSTimeInterval)dt;
 
 @end

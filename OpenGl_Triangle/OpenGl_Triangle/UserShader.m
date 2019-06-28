@@ -15,10 +15,6 @@
     GLuint viewMatrix_u;
     GLuint projectionMatrix_u;
     GLuint lightColor_u;
-    GLuint lightAmbientIntensity_u;
-    GLuint lightDiffuseIntensity_u;
-    GLuint lightSpecularIntensity_u;
-    GLuint Shininess_u;
     GLuint lightDirection_u;
     GLuint texture_u;
 }
@@ -33,7 +29,7 @@
     if(self = [super init])
     {
         [self prepareProgramWithVertexShader:vsPath FragmentShader:fsPath];
-    } 
+    }
     return self;
 }
 
@@ -45,11 +41,7 @@
     glUniformMatrix4fv(projectionMatrix_u, 1, 0, self.projectionMatrix.m);
     
     glUniform3f(lightColor_u, 1, 1, 1);
-    glUniform1f(lightAmbientIntensity_u, 0.5);
-    glUniform1f(lightDiffuseIntensity_u, 0.5);
-    glUniform1f(lightSpecularIntensity_u, 3.0);
-    glUniform1f(Shininess_u, 128.0);
-    GLKVector3 lightDirection = GLKVector3Normalize(GLKVector3Make(1, -2, -1));
+    GLKVector3 lightDirection = GLKVector3Normalize(GLKVector3Make(2, -1, -3));
     glUniform3f(lightDirection_u, lightDirection.x, lightDirection.y, lightDirection.z);
 }
 
@@ -72,9 +64,9 @@
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _texture);
     glUniform1i(texture_u, 0);
-
-}
     
+}
+
 - (GLuint)setupTexture:(NSString *)fileName {
     // Load image
     CGImageRef spriteImage = [UIImage imageNamed:fileName].CGImage;
@@ -138,10 +130,6 @@
     viewMatrix_u = glGetUniformLocation(programHandle, "u_ViewMatrix");
     projectionMatrix_u = glGetUniformLocation(programHandle, "u_ProjectionMatrix");
     lightColor_u = glGetUniformLocation(programHandle, "u_Light.Color");
-    lightAmbientIntensity_u = glGetUniformLocation(programHandle, "u_Light.AmbientIntensity");
-    lightDiffuseIntensity_u = glGetUniformLocation(programHandle, "u_Light.DiffuseIntensity");
-    lightSpecularIntensity_u = glGetUniformLocation(programHandle, "u_SpecularIntensity");
-    Shininess_u = glGetUniformLocation(programHandle, "u_Shininess");
     lightDirection_u = glGetUniformLocation(programHandle, "u_Light.Direction");
     
 }
@@ -172,5 +160,47 @@
     
     return shaderHandle;
 }
+
+-(void)SetUniform1f:(const GLchar *)name WithValue:(float)value{
+    GLuint uniform =  glGetUniformLocation(programHandle, name);
+    glUniform1f(uniform, value);
+}
+-(void)SetUniform2f:(const GLchar *)name WithValueX:(float)value Y:(float)value2{
+    GLuint uniform =  glGetUniformLocation(programHandle, name);
+    glUniform2f(uniform, value, value2);
+}
+-(void)SetUniform3f:(const GLchar *)name WithValueX:(float)value Y:(float)value2 Z:(float)value3{
+    GLuint uniform =  glGetUniformLocation(programHandle, name);
+    glUniform3f(uniform, value, value2, value3);
+}
+-(void)SetUniform1i:(const GLchar *)name WithValue:(int)value{
+    GLuint uniform =  glGetUniformLocation(programHandle, name);
+    glUniform1i(uniform, value);
+}
+-(void)SetUniform2i:(const GLchar *)name WithValueX:(int)value Y:(int)value2{
+    GLuint uniform =  glGetUniformLocation(programHandle, name);
+    glUniform2i(uniform, value, value2);
+}
+-(void)SetUniform3i:(const GLchar *)name WithValueX:(int)value Y:(int)value2 Z:(int)value3{
+    GLuint uniform =  glGetUniformLocation(programHandle, name);
+    glUniform3i(uniform, value, value2, value3);
+}
+-(void)SetUniformMat2:(const GLchar *)name WithMatrix:(const GLfloat *)value{
+    GLuint uniform =  glGetUniformLocation(programHandle, name);
+    glUniformMatrix2fv(uniform, 1, 0, value);
+}
+-(void)SetUniformMat3:(const GLchar *)name WithMatrix:(const GLfloat *)value{
+    GLuint uniform =  glGetUniformLocation(programHandle, name);
+    glUniformMatrix3fv(uniform, 1, 0, value);
+}
+-(void)SetUniformMat4:(const GLchar *)name WithMatrix:(const GLfloat *)value{
+    GLuint uniform =  glGetUniformLocation(programHandle, name);
+    glUniformMatrix4fv(uniform, 1, 0, value);
+}
+
+
+
+
+
 
 @end

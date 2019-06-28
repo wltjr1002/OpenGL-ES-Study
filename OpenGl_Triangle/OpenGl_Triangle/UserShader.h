@@ -23,6 +23,16 @@
 - (void) useProgram;
 - (void) useProgramWithTexture:(NSString *)textureName;
 
+-(void)SetUniform1f:(const GLchar *)name WithValue:(float)value;
+-(void)SetUniform2f:(const GLchar *)name WithValueX:(float)value Y:(float)value2;
+-(void)SetUniform3f:(const GLchar *)name WithValueX:(float)value Y:(float)value2 Z:(float)value3;
+-(void)SetUniform1i:(const GLchar *)name WithValue:(int)value;
+-(void)SetUniform2i:(const GLchar *)name WithValueX:(int)value Y:(int)value2;
+-(void)SetUniform3i:(const GLchar *)name WithValueX:(int)value Y:(int)value2 Z:(int)value3;
+-(void)SetUniformMat2:(const GLchar *)name WithMatrix:(const GLfloat *)value;
+-(void)SetUniformMat3:(const GLchar *)name WithMatrix:(const GLfloat *)value;
+-(void)SetUniformMat4:(const GLchar *)name WithMatrix:(const GLfloat *)value;
+
 @end
 
 

@@ -99,20 +99,6 @@
             for(int j=0;j<line.count-3;j++)
             {
                 GLKVector3 newVertex1, newVertex2, newVertex3;
-                /* triangle strip
-                if(j%2==0)
-                {
-                    newVertex1 = _vertices[[[line objectAtIndex:1+j] integerValue]-1];
-                    newVertex2 = _vertices[[[line objectAtIndex:2+j] integerValue]-1];
-                    newVertex3 = _vertices[[[line objectAtIndex:3+j] integerValue]-1];
-                }
-                else
-                {
-                    newVertex1 = _vertices[[[line objectAtIndex:2+j] integerValue]-1];
-                    newVertex2 = _vertices[[[line objectAtIndex:1+j] integerValue]-1];
-                    newVertex3 = _vertices[[[line objectAtIndex:3+j] integerValue]-1];
-                }
-                */
                 newVertex1 = _vertices[[[line objectAtIndex:1] integerValue]-1];
                 newVertex2 = _vertices[[[line objectAtIndex:2+j] integerValue]-1];
                 newVertex3 = _vertices[[[line objectAtIndex:3+j] integerValue]-1];
@@ -120,9 +106,9 @@
                 GLKVector3 normal = GLKVector3CrossProduct(GLKVector3Subtract(newVertex1, newVertex2), GLKVector3Subtract(newVertex2, newVertex3));
                 normal = GLKVector3Normalize(normal);
                 
-                SceneVertex sceneVertex1 = (SceneVertex){newVertex1, {0.3f,0.3f,0.3f}, {0,0}, normal};
-                SceneVertex sceneVertex2 = (SceneVertex){newVertex2, {0.3f,0.3f,0.3f}, {0,0}, normal};
-                SceneVertex sceneVertex3 = (SceneVertex){newVertex3, {0.3f,0.3f,0.3f}, {0,0}, normal};
+                SceneVertex sceneVertex1 = (SceneVertex){newVertex1, {1.0f,1.0f,1.0f}, {0,0}, normal};
+                SceneVertex sceneVertex2 = (SceneVertex){newVertex2, {1.0f,1.0f,1.0f}, {0,0}, normal};
+                SceneVertex sceneVertex3 = (SceneVertex){newVertex3, {1.0f,1.0f,1.0f}, {0,0}, normal};
                 
                 _sceneVertices[sceneVertexCount] = sceneVertex1;
                 _sceneVertices[sceneVertexCount+1] = sceneVertex2;
