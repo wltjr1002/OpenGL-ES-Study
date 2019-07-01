@@ -13,6 +13,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ObjParser : NSObject
 
+
+struct Vertex{
+    GLKVector3 vertexPosition;
+    int referenceCount;
+};
+
+struct Material
+{
+    GLKVector3 ambient;
+    GLKVector3 diffuse;
+    GLKVector3 specular;
+    float shininess;
+};
+
 -(instancetype)initWithFilename:(NSString *)filename;
 
 -(SceneVertex *)sceneVertices;

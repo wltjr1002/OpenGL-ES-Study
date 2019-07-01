@@ -15,6 +15,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Model : NSObject
+{
+    char * _name;
+    GLuint _VAO;
+    GLuint _vertexBuffer;
+    GLuint _indexBuffer;
+    unsigned int _vertexCount;
+    unsigned int _indexCount;
+    UserShader * _shader;
+}
 
 @property (nonatomic, assign) GLKVector3 position;
 @property (nonatomic) float rotationX;
@@ -25,11 +34,15 @@ NS_ASSUME_NONNULL_BEGIN
 -(instancetype) initWithName:(char *)name shader:(UserShader *)shader vertices:(SceneVertex *)vertices vertexCount:(unsigned int)count indices:(int *)indices indexCount:(unsigned int)indexCount;
 -(instancetype) initWithName:(char *)name shader:(UserShader *)shader vertices:(SceneVertex *)vertices vertexCount:(unsigned int)count;
 
+-(GLKMatrix4)modelMatrix;
+
 -(void)render;
 -(void)renderWithParentModelMatrix:(GLKMatrix4)parentModelMatrix;
 -(void)renderWithTexture:(NSString *)filename;
 -(void)renderWithMaterialKa:(GLKVector3)ambient Kd:(GLKVector3)diffuse Ks:(GLKVector3)specular Shininess:(float)shininess;
 -(void)updateWithDelta:(NSTimeInterval)dt;
+
+-(void)draw;
 
 @end
 

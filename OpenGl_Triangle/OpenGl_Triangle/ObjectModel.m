@@ -25,7 +25,7 @@
 
 -(void)updateWithDelta:(NSTimeInterval)dt
 {
-    //self.rotationY += M_PI * dt * 0.1;
+    self.rotationY += M_PI * dt * 0.1;
 }
 
 

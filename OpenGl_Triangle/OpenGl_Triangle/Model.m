@@ -10,15 +10,6 @@
 
 
 @implementation Model
-    {
-        char * _name;
-        GLuint _VAO;
-        GLuint _vertexBuffer;
-        GLuint _indexBuffer;
-        unsigned int _vertexCount;
-        unsigned int _indexCount;
-        UserShader * _shader;
-    }
     
 -(instancetype)initWithName:(char *)name shader:(UserShader *)shader vertices:(SceneVertex *)vertices vertexCount:(unsigned int)vertexCount indices:(int *)indices indexCount:(unsigned int)indexCount
     {
