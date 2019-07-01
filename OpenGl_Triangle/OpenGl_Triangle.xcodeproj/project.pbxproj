@@ -28,6 +28,7 @@
 		EB7BF2E722C9FEFF0068FECE /* Japanese_Temple_Paint2_Japanese_Shrine_Mat_Roughness.png in Resources */ = {isa = PBXBuildFile; fileRef = EB7BF2E222C9FEFE0068FECE /* Japanese_Temple_Paint2_Japanese_Shrine_Mat_Roughness.png */; };
 		EB7BF2E822C9FEFF0068FECE /* Japanese_Temple_Paint2_Japanese_Shrine_Mat_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = EB7BF2E322C9FEFF0068FECE /* Japanese_Temple_Paint2_Japanese_Shrine_Mat_Normal.png */; };
 		EB7BF2EC22C9FF750068FECE /* Temple.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7BF2EB22C9FF750068FECE /* Temple.m */; };
+		EB7BF2EE22CA03C10068FECE /* rainbow.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EB7BF2ED22CA03C10068FECE /* rainbow.jpeg */; };
 		EB8A86582297C151003F2BEB /* chCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8A86572297C151003F2BEB /* chCamera.m */; };
 		EBA7F74422C34F59007C6DF1 /* dodecahedron.txt in Resources */ = {isa = PBXBuildFile; fileRef = EBA7F74322C34F59007C6DF1 /* dodecahedron.txt */; };
 		EBA7F74622C3650A007C6DF1 /* magnolia.obj in Resources */ = {isa = PBXBuildFile; fileRef = EBA7F74522C3650A007C6DF1 /* magnolia.obj */; };
@@ -74,6 +75,7 @@
 		EB7BF2E322C9FEFF0068FECE /* Japanese_Temple_Paint2_Japanese_Shrine_Mat_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Japanese_Temple_Paint2_Japanese_Shrine_Mat_Normal.png; sourceTree = "<group>"; };
 		EB7BF2EA22C9FF750068FECE /* Temple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Temple.h; sourceTree = "<group>"; };
 		EB7BF2EB22C9FF750068FECE /* Temple.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Temple.m; sourceTree = "<group>"; };
+		EB7BF2ED22CA03C10068FECE /* rainbow.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rainbow.jpeg; sourceTree = "<group>"; };
 		EB8A86562297C151003F2BEB /* chCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chCamera.h; sourceTree = "<group>"; };
 		EB8A86572297C151003F2BEB /* chCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chCamera.m; sourceTree = "<group>"; };
 		EBA7F74322C34F59007C6DF1 /* dodecahedron.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dodecahedron.txt; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		EB2B3B0F22C467CB00C146D8 /* Texture */ = {
 			isa = PBXGroup;
 			children = (
+				EB7BF2ED22CA03C10068FECE /* rainbow.jpeg */,
 				EB7BF2DF22C9FEFD0068FECE /* Japanese_Temple_Paint2_Japanese_Shrine_Mat_AlbedoTransparency.png */,
 				EB7BF2E022C9FEFE0068FECE /* Japanese_Temple_Paint2_Japanese_Shrine_Mat_AO.png */,
 				EB7BF2E122C9FEFE0068FECE /* Japanese_Temple_Paint2_Japanese_Shrine_Mat_MetallicSmoothness.png */,
@@ -284,6 +287,7 @@
 			files = (
 				EB4CA16F22C4A8A000992839 /* skyscraper.obj in Resources */,
 				EB7BF2E622C9FEFF0068FECE /* Japanese_Temple_Paint2_Japanese_Shrine_Mat_MetallicSmoothness.png in Resources */,
+				EB7BF2EE22CA03C10068FECE /* rainbow.jpeg in Resources */,
 				EBCB61BD2282E4A900CA8706 /* LaunchScreen.storyboard in Resources */,
 				EBA7F74922C3658C007C6DF1 /* dodecahedron.obj in Resources */,
 				EBCB61BA2282E4A900CA8706 /* Assets.xcassets in Resources */,

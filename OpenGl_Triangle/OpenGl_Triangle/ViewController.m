@@ -94,7 +94,7 @@
 }
 
 -(void)update{
-    [_objModel updateWithDelta:self.timeSinceLastUpdate];
+    //[_objModel updateWithDelta:self.timeSinceLastUpdate];
 }
 // Input Methods
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

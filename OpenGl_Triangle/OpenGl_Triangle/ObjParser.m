@@ -123,6 +123,7 @@
     // fill vertex, normal and textureCoordination array
     int vertexIndex = 0;
     int normalIndex = 0;
+    int textureIndex = 0;
     for (int i = 0; i<lines.count; i++)
     {
         NSArray* line = [self split:lines[i]];
@@ -137,6 +138,12 @@
             GLKVector3 newVector = GLKVector3Make([[line objectAtIndex:1] floatValue], [[line objectAtIndex:2] floatValue], [[line objectAtIndex:3] floatValue]);
             _normals[normalIndex] = newVector;
             normalIndex++;
+        }
+        if(_textureInfo && [[line objectAtIndex:0] isEqualToString:@"vt"])
+        {
+            GLKVector2 newVector = GLKVector2Make([[line objectAtIndex:1] floatValue], -[[line objectAtIndex:2] floatValue]);
+            _texCoords[textureIndex] = newVector;
+            textureIndex++;
         }
     }
     

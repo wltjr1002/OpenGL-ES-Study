@@ -40,5 +40,5 @@ void main(){
     lowp float SpecularFactor = pow(max(0.0, -dot(Reflection,Eye)),u_Material.shininess*128.0);
     lowp vec4 SpecularColor = vec4(u_Material.specular, 1.0) * vec4(u_Light.Color * SpecularFactor, 1.0);
     
-    out_color = vec4(fcolor, 1.0) * (AmbientColor + DiffuseColor + SpecularColor);
+    out_color = texture(u_texture, ftexCoord) * (AmbientColor + DiffuseColor + SpecularColor);
 }

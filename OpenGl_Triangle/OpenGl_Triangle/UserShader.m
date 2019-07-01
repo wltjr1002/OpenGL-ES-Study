@@ -51,11 +51,18 @@
     [self useTexture:textureName];
 }
 
+-(void) useProgramWithTexture:(NSString *)textureName NormalMap:(NSString *)normalName
+{
+    [self useProgram];
+    [self useTexture:textureName];
+    [self useNormalMap:normalName];
+}
+
 - (void) useTexture:(NSString *)fileName
 {
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
     GLuint _texture = [self setupTexture:fileName];
@@ -64,6 +71,11 @@
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _texture);
     glUniform1i(texture_u, 0);
+    
+}
+
+-(void) useNormalMap:(NSString *)fileName
+{
     
 }
 
@@ -95,10 +107,8 @@
     glGenTextures(1, &texName);
     glBindTexture(GL_TEXTURE_2D, texName);
     
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
-    
+    glGenerateMipmap(GL_TEXTURE_2D);
     
     free(spriteData);
     return texName;

@@ -18,16 +18,19 @@
 -(void)render
 {
     _shader.modelMatrix = [self modelMatrix];
-    [_shader useProgram];
-    GLKVector3 ambient = GLKVector3Make(0.02f, 0.02f, 0.02f);
-    GLKVector3 diffuse = GLKVector3Make(0.01f, 0.01f, 0.01f);
-    GLKVector3 specular = GLKVector3Make(0.4f, 0.4f, 0.4f);
-    float shininess = 0.078f;
+    [_shader useProgramWithTexture:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Texture/Japanese_Temple_Paint2_Japanese_Shrine_Mat_AlbedoTransparency.png"];
+    //[_shader useProgramWithTexture:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Texture/rainbow.jpeg"];
+    GLKVector3 ambient = GLKVector3Make(1.0f, 1.0f, 1.0f);
+    GLKVector3 diffuse = GLKVector3Make(0.64f, 0.64f, 0.64f);
+    GLKVector3 specular = GLKVector3Make(0.5f, 0.5f, 0.5f);
+    float shininess = 0.75f;
     [_shader SetUniform3f:"u_Material.ambient" WithValueX:ambient.x Y:ambient.y Z:ambient.z];
     [_shader SetUniform3f:"u_Material.diffuse" WithValueX:diffuse.x Y:diffuse.y Z:diffuse.z];
     [_shader SetUniform3f:"u_Material.specular" WithValueX:specular.x Y:specular.y Z:specular.z];
     [_shader SetUniform1f:"u_Material.shininess" WithValue:shininess];
     [self draw];
 }
+
+
 
 @end
