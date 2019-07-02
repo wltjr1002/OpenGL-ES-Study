@@ -19,14 +19,6 @@ struct Vertex{
     int referenceCount;
 };
 
-struct Material
-{
-    GLKVector3 ambient;
-    GLKVector3 diffuse;
-    GLKVector3 specular;
-    float shininess;
-};
-
 -(instancetype)initWithFilename:(NSString *)filename;
 
 -(SceneVertex *)sceneVertices;

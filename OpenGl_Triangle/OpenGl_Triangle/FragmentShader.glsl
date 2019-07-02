@@ -17,6 +17,7 @@ uniform Material u_Material;
 
 
 uniform sampler2D u_texture;
+uniform sampler2D u_normalMap;
 
 in vec3 fcolor;
 in vec3 fnormal;

@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
     UserShader * _shader;
 }
 
+
+
 @property (nonatomic, assign) GLKVector3 position;
 @property (nonatomic) float rotationX;
 @property (nonatomic) float rotationY;

@@ -24,82 +24,50 @@
             self.rotationY = 0;
             self.rotationZ = 0;
             self.scale = 1.0;
+        
+            glGenVertexArrays(1, &_VAO);
+            glBindVertexArray(_VAO);
+            
+            // Set Vertex Buffer
+            glGenBuffers(1, &_vertexBuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+            glBufferData(GL_ARRAY_BUFFER, _vertexCount * sizeof(SceneVertex), vertices, GL_STATIC_DRAW);
+            
+            // Set Element Buffer
+            glGenBuffers(1, &_indexBuffer);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indexCount * sizeof(int), indices, GL_STATIC_DRAW);
+            
+            // Set Vertex Arrtibute Array
+            glEnableVertexAttribArray(0);
+            glEnableVertexAttribArray(1);
+            glEnableVertexAttribArray(2);
+            glEnableVertexAttribArray(3);
+            glEnableVertexAttribArray(4);
+            glEnableVertexAttribArray(5);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, positionCoords));
+            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, colorCoords));
+            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, textureCoords));
+            glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, normal));
+            glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, tangent));
+            glVertexAttribPointer(5, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, bitangent));
+            
+            // Unbinding
+            glBindVertexArray(0);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
         }
-        
-        glGenVertexArrays(1, &_VAO);
-        glBindVertexArray(_VAO);
-        
-        // Set Vertex Buffer
-        glGenBuffers(1, &_vertexBuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-        glBufferData(GL_ARRAY_BUFFER, _vertexCount * sizeof(SceneVertex), vertices, GL_STATIC_DRAW);
-        
-        // Set Element Buffer
-        glGenBuffers(1, &_indexBuffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indexCount * sizeof(int), indices, GL_STATIC_DRAW);
-        
-        // Set Vertex Arrtibute Array
-        glEnableVertexAttribArray(0);
-        glEnableVertexAttribArray(1);
-        glEnableVertexAttribArray(2);
-        glEnableVertexAttribArray(3);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, positionCoords));
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, colorCoords));
-        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, normal));
-        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, textureCoords));
-        
-        // Unbinding
-        glBindVertexArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        
         return self;
     }
 
 -(instancetype)initWithName:(char *)name shader:(UserShader *)shader vertices:(SceneVertex *)vertices vertexCount:(unsigned int)vertexCount
 {
+    
     if(self = [super init])
     {
-        _name = name;
-        _vertexCount = vertexCount;
-        _indexCount = vertexCount;
-        _shader = shader;
-        self.position = GLKVector3Make(0, 0, 0);
-        self.rotationX = 0;
-        self.rotationY = 0;
-        self.rotationZ = 0;
-        self.scale = 1.0;
+        int* indices = malloc(sizeof(int)*vertexCount);
+        for(int i=0;i<vertexCount;i++){indices[i]=i;}
+        self = [self initWithName:name shader:shader vertices:vertices vertexCount:vertexCount indices:indices indexCount:vertexCount];
     }
-    int* indices = malloc(sizeof(int)*_indexCount);
-    for(int i=0;i<_indexCount;i++){indices[i]=i;}
-    
-    glGenVertexArrays(1, &_VAO);
-    glBindVertexArray(_VAO);
-    
-    // Set Vertex Buffer
-    glGenBuffers(1, &_vertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, _vertexCount * sizeof(SceneVertex), vertices, GL_STATIC_DRAW);
-    
-    // Set Element Buffer
-    glGenBuffers(1, &_indexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indexCount * sizeof(int), indices, GL_STATIC_DRAW);
-    
-    // Set Vertex Arrtibute Array
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    glEnableVertexAttribArray(2);
-    glEnableVertexAttribArray(3);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, positionCoords));
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, colorCoords));
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, normal));
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(SceneVertex), (const GLvoid *)offsetof(SceneVertex, textureCoords));
-    
-    // Unbinding
-    glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    
     return self;
 }
     
@@ -154,7 +122,10 @@
     [_shader SetUniform1f:"u_Material.shininess" WithValue:shininess];
     [self draw];
 }
-
+-(void)UseMaterial
+{
+    
+}
     
 -(void)draw
     {

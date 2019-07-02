@@ -9,11 +9,21 @@
 
 #ifndef SceneVertex_h
 #define SceneVertex_h
+struct Material
+{
+    GLKVector3 ambient;
+    GLKVector3 diffuse;
+    GLKVector3 specular;
+    float shininess;
+};
+
 typedef struct{
     GLKVector3 positionCoords;
     GLKVector3 colorCoords;
     GLKVector2 textureCoords;
     GLKVector3 normal;
+    GLKVector3 tangent;
+    GLKVector3 bitangent;
 }
 SceneVertex;
 
