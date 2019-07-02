@@ -16,7 +16,9 @@
     GLuint projectionMatrix_u;
     GLuint lightColor_u;
     GLuint lightDirection_u;
-    GLuint texture_u;
+    
+    GLubyte* _texture;
+    GLubyte* _normalMap;
 }
 
 - (id) init
@@ -43,75 +45,54 @@
     glUniform3f(lightColor_u, 1, 1, 1);
     GLKVector3 lightDirection = GLKVector3Normalize(GLKVector3Make(2, -1, -3));
     glUniform3f(lightDirection_u, lightDirection.x, lightDirection.y, lightDirection.z);
+    
+    [self SetUniform1i:"u_texture" WithValue:0];
+    [self SetUniform1i:"u_normalMap" WithValue:1];
+}
+- (void) useMaterialAmbient:(GLKVector3)ambient Diffuse:(GLKVector3)diffuse Specular:(GLKVector3)specular Shininess:(float)shininess
+{
+    [self SetUniform3f:"u_Material.ambient" WithValueX:ambient.x Y:ambient.y Z:ambient.z];
+    [self SetUniform3f:"u_Material.diffuse" WithValueX:diffuse.x Y:diffuse.y Z:diffuse.z];
+    [self SetUniform3f:"u_Material.specular" WithValueX:specular.x Y:specular.y Z:specular.z];
+    [self SetUniform1f:"u_Material.shininess" WithValue:shininess];
 }
 
-- (void) useProgramWithTexture:(NSString *)textureName
+- (void) useTexture:(GLubyte *)texture Width:(GLsizei)width Height:(GLsizei)height
 {
-    [self useProgram];
-    [self useTexture:textureName];
-}
-
--(void) useProgramWithTexture:(NSString *)textureName NormalMap:(NSString *)normalName
-{
-    [self useProgram];
-    [self useTexture:textureName];
-    [self useNormalMap:normalName];
-}
-
-- (void) useTexture:(NSString *)fileName
-{
+    if(_texture == texture) return;
+    else _texture = texture;
+    // set active texture 0(sprite)
+    glActiveTexture(GL_TEXTURE0);
+    
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    GLuint _texture = [self setupTexture:fileName];
-    texture_u = glGetUniformLocation(programHandle, "u_texture");
-    
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, _texture);
-    glUniform1i(texture_u, 0);
-    
-}
-
--(void) useNormalMap:(NSString *)fileName
-{
-    
-}
-
-- (GLuint)setupTexture:(NSString *)fileName {
-    // Load image
-    CGImageRef spriteImage = [UIImage imageNamed:fileName].CGImage;
-    if (!spriteImage)
-    {
-        NSLog(@"Failed to load image %@", fileName);
-        exit(1);
-    }
-    
-    // Set image context to copy data
-    GLsizei width = (GLsizei)CGImageGetWidth(spriteImage);
-    GLsizei height = (GLsizei)CGImageGetHeight(spriteImage);
-    
-    GLubyte * spriteData = (GLubyte *) calloc(width*height*4, sizeof(GLubyte));
-    
-    CGContextRef spriteContext = CGBitmapContextCreate(spriteData, width, height, 8, width*4,
-                                                       CGImageGetColorSpace(spriteImage), kCGImageAlphaPremultipliedLast);
-    
-    // Copy image data into the context
-    CGContextDrawImage(spriteContext, CGRectMake(0, 0, width, height), spriteImage);
-    
-    CGContextRelease(spriteContext);
     
     // Bind texture into GL_TEXTURE_2D
     GLuint texName;
     glGenTextures(1, &texName);
     glBindTexture(GL_TEXTURE_2D, texName);
     
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture);
     glGenerateMipmap(GL_TEXTURE_2D);
     
-    free(spriteData);
-    return texName;
+}
+
+-(void) useNormalMap:(GLubyte *)normalMap Width:(GLsizei)width Height:(GLsizei)height
+{
+    if(_normalMap==normalMap) return;
+    else _normalMap = normalMap;
+    //set active texture 1(normalMap)
+    glActiveTexture(GL_TEXTURE1);
+    //set texture parameters;
+    //bind and copy data
+    GLuint texName;
+    glGenTextures(1, &texName);
+    glBindTexture(GL_TEXTURE_2D, texName);
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, normalMap);
+    glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 - (void)prepareProgramWithVertexShader:(NSString *)vsPath FragmentShader:(NSString *)fsPath
@@ -207,10 +188,5 @@
     GLuint uniform =  glGetUniformLocation(programHandle, name);
     glUniformMatrix4fv(uniform, 1, 0, value);
 }
-
-
-
-
-
 
 @end

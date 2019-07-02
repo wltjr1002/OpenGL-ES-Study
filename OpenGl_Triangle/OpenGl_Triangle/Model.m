@@ -95,33 +95,7 @@
         [_shader SetUniform1f:"u_Material.shininess" WithValue:shininess];
         [self draw];
     }
-    
--(void)renderWithParentModelMatrix:(GLKMatrix4)parentModelMatrix
-    {
-        GLKMatrix4 modelMatrix = GLKMatrix4Multiply(parentModelMatrix, [self modelMatrix]);
-        _shader.modelMatrix = modelMatrix;
-        
-        [_shader useProgram];
-        [self draw];
-    }
-    
--(void) renderWithTexture:(NSString *)filename
-    {
-        _shader.modelMatrix = [self modelMatrix];
-        [_shader useProgramWithTexture:filename];
-        [self draw];
-    }
 
--(void)renderWithMaterialKa:(GLKVector3)ambient Kd:(GLKVector3)diffuse Ks:(GLKVector3)specular Shininess:(float)shininess
-{
-    _shader.modelMatrix = [self modelMatrix];
-    [_shader useProgram];
-    [_shader SetUniform3f:"u_Material.ambient" WithValueX:ambient.x Y:ambient.y Z:ambient.z];
-    [_shader SetUniform3f:"u_Material.diffuse" WithValueX:diffuse.x Y:diffuse.y Z:diffuse.z];
-    [_shader SetUniform3f:"u_Material.specular" WithValueX:specular.x Y:specular.y Z:specular.z];
-    [_shader SetUniform1f:"u_Material.shininess" WithValue:shininess];
-    [self draw];
-}
 -(void)UseMaterial
 {
     

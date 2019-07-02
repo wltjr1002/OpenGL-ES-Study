@@ -9,6 +9,13 @@
 
 #ifndef SceneVertex_h
 #define SceneVertex_h
+
+struct Sprite{
+    GLsizei width;
+    GLsizei height;
+    GLubyte *data;
+};
+
 struct Material
 {
     GLKVector3 ambient;
