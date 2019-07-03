@@ -13,6 +13,7 @@
     bool _isTextureLoaded;
     struct Sprite _texture;
     struct Sprite _normalMap;
+    struct Sprite _AO;
 }
 
 -(instancetype)initWithShader:(UserShader *)shader{
@@ -28,11 +29,13 @@
     {
         [self SaveSpriteData:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Texture/Japanese_Temple_Paint2_Japanese_Shrine_Mat_AlbedoTransparency.png" Sprite:&_texture];
         [self SaveSpriteData:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Texture/Japanese_Temple_Paint2_Japanese_Shrine_Mat_Normal.png" Sprite:&_normalMap];
+        [self SaveSpriteData:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Texture/Japanese_Temple_Paint2_Japanese_Shrine_Mat_AO.png" Sprite:&_AO];
         _isTextureLoaded = true;
     }
     [_shader useProgram];
     [_shader useTexture:_texture.data Width:_texture.width Height:_texture.height];
     [_shader useNormalMap:_normalMap.data Width:_normalMap.width Height:_normalMap.height];
+    [_shader useAO:_AO.data Width:_AO.width Height:_AO.height];
     [_shader useMaterialAmbient:GLKVector3Make(1.0f, 1.0f, 1.0f) Diffuse:GLKVector3Make(0.64f, 0.64f, 0.64f) Specular:GLKVector3Make(0.5f, 0.5f, 0.5f) Shininess:0.75f];
     [self draw];
 }

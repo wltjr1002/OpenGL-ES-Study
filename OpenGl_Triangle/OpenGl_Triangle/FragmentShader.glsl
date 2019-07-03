@@ -17,6 +17,7 @@ uniform Material u_Material;
 
 uniform sampler2D u_texture;
 uniform sampler2D u_normalMap;
+uniform sampler2D u_AO;
 
 in vec3 fposition;
 in vec3 fcolor;
@@ -26,12 +27,16 @@ in mat3 ftbn;
 out vec4 out_color;
 
 void main(){
+    lowp vec3 FragColor = texture(u_normalMap, ftexCoord).rgb;
+    lowp float AmbientOcclusion = texture(u_AO, ftexCoord).r;
+    
     lowp vec3 LightDirection = u_Light.Direction;
     //LightDirection = fposition;
     //Ambient
-    lowp vec4 AmbientColor = vec4(u_Material.ambient, 1.0) * vec4(u_Light.Color, 1.0);
+    
+    lowp vec4 AmbientColor = vec4(u_Material.ambient, 1.0) * vec4(u_Light.Color, 1.0) * AmbientOcclusion;
     //Diffuse
-    lowp vec3 Normal = normalize(ftbn * texture(u_normalMap, ftexCoord).rgb * 2.0 - 1.0);
+    lowp vec3 Normal = normalize(ftbn * FragColor * 2.0 - 1.0);
     lowp float DiffuseFactor = max(-dot(Normal, LightDirection), 0.0);
     lowp vec4 DiffuseColor = vec4(u_Material.diffuse, 1.0) * vec4(u_Light.Color, 1.0) * DiffuseFactor;
     //Specular

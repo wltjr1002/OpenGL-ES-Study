@@ -11,8 +11,6 @@
 
 // class extension for writing readonly variables
 @interface chCamera()
-@property (readwrite) GLKVector3 Position;
-@property (readwrite) GLKQuaternion Orientation;
 @property (readwrite) GLKVector3 Front;
 @property (readwrite) GLKVector3 Right;
 @property (readwrite) float Zoom;
@@ -53,6 +51,18 @@
     }
     
     return self;
+}
+
+-(void)RotateAroundYaxis:(float)degree
+{
+    RightAngle += degree;
+    GLKVector3 pos = self.Position;
+    float sinTheta = sinf(-degree);
+    float cosTheta = cosf(-degree);
+    float x = pos.x * cosTheta - pos.z * sinTheta;
+    float z = pos.x * sinTheta + pos.z * cosTheta;
+    self.Position = GLKVector3Make(x, pos.y, z);
+    [self updateCameraVectors];
 }
 
 -(void) ProcessKeyboard:(enum Camera_Movement)direction deltaTime:(float)dt

@@ -19,6 +19,7 @@
     
     GLubyte* _texture;
     GLubyte* _normalMap;
+    GLubyte* _AO;
 }
 
 - (id) init
@@ -42,12 +43,13 @@
     glUniformMatrix4fv(viewMatrix_u, 1, 0, self.viewMatrix.m);
     glUniformMatrix4fv(projectionMatrix_u, 1, 0, self.projectionMatrix.m);
     
-    glUniform3f(lightColor_u, 0.7f, 0.7f, 0.7f);
+    glUniform3f(lightColor_u, 0.9f, 0.9f, 0.9f);
     GLKVector3 lightDirection = GLKVector3Normalize(GLKVector3Make(2, -1, -3));
     glUniform3f(lightDirection_u, lightDirection.x, lightDirection.y, lightDirection.z);
     
     [self SetUniform1i:"u_texture" WithValue:0];
     [self SetUniform1i:"u_normalMap" WithValue:1];
+    [self SetUniform1i:"u_AO" WithValue:2];
 }
 - (void) useMaterialAmbient:(GLKVector3)ambient Diffuse:(GLKVector3)diffuse Specular:(GLKVector3)specular Shininess:(float)shininess
 {
@@ -77,6 +79,7 @@
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture);
     glGenerateMipmap(GL_TEXTURE_2D);
     
+    
 }
 
 -(void) useNormalMap:(GLubyte *)normalMap Width:(GLsizei)width Height:(GLsizei)height
@@ -98,6 +101,29 @@
     
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, normalMap);
     glGenerateMipmap(GL_TEXTURE_2D);
+    
+}
+
+-(void) useAO:(GLubyte *)ao Width:(GLsizei)width Height:(GLsizei)height
+{
+    if(_AO==ao) return;
+    else _AO = ao;
+    //set active texture 1(normalMap)
+    glActiveTexture(GL_TEXTURE2);
+    //set texture parameters;
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
+    //bind and copy data
+    GLuint texName;
+    glGenTextures(1, &texName);
+    glBindTexture(GL_TEXTURE_2D, texName);
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, ao);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    
 }
 
 - (void)prepareProgramWithVertexShader:(NSString *)vsPath FragmentShader:(NSString *)fsPath

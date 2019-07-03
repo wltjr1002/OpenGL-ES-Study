@@ -26,8 +26,8 @@ enum Camera_Movement
     RIGHT
 };
 
-@property (readonly) GLKVector3 Position;
-@property (readonly) GLKQuaternion Orientation;
+@property (readwrite) GLKVector3 Position;
+@property (readwrite) GLKQuaternion Orientation;
 @property (readonly) GLKVector3 Front;
 @property (readonly) GLKVector3 Right;
 @property (readonly) float Zoom;
@@ -35,6 +35,7 @@ enum Camera_Movement
 - (void) ProcessKeyboard:(enum Camera_Movement)direction deltaTime:(float)dt;
 - (void) ProcessMouseMovement:(bool)preventPitch Xoffset:(float)xo Yoffset:(float)yo;
 - (void) ProcessMouseScroll:(float)yOffset;
+- (void) RotateAroundYaxis:(float)degree;
 - (void) GetViewMatrix:(GLKMatrix4*) View;
 
 

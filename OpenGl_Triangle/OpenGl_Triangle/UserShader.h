@@ -24,6 +24,7 @@
 - (void) useMaterialAmbient:(GLKVector3)ambient Diffuse:(GLKVector3)diffuse Specular:(GLKVector3)specular Shininess:(float)shininess;
 - (void) useTexture:(GLubyte *)texture Width:(GLsizei)width Height:(GLsizei)height;
 - (void) useNormalMap:(GLubyte *)normalMap Width:(GLsizei)width Height:(GLsizei)height;
+- (void) useAO:(GLubyte *)ao Width:(GLsizei)width Height:(GLsizei)height;
 
 -(void)SetUniform1f:(const GLchar *)name WithValue:(float)value;
 -(void)SetUniform2f:(const GLchar *)name WithValueX:(float)value Y:(float)value2;
