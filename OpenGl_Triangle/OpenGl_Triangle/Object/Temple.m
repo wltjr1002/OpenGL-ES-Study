@@ -27,7 +27,7 @@
     if(!_isTextureLoaded)
     {
         [self SaveSpriteData:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Texture/Japanese_Temple_Paint2_Japanese_Shrine_Mat_AlbedoTransparency.png" Sprite:&_texture];
-        [self SaveSpriteData:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Texture/Japanese_Temple_Paint2_Japanese_Shrine_Mat_AO.png" Sprite:&_normalMap];
+        [self SaveSpriteData:@"/Users/clonekim/Desktop/OpenGLProjects/OpenGLStudy/OpenGl_Triangle/OpenGl_Triangle/Texture/Japanese_Temple_Paint2_Japanese_Shrine_Mat_Normal.png" Sprite:&_normalMap];
         _isTextureLoaded = true;
     }
     [_shader useProgram];

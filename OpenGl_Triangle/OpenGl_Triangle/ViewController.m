@@ -63,7 +63,7 @@
     //scene setting
     _objModel = [[Temple alloc] initWithShader:_shader];
     
-    _objModel.position = GLKVector3Make(0, -10, -50);
+    _objModel.position = GLKVector3Make(0, -10, -30);
 }
 
 - (void)viewDidLoad {

@@ -7,7 +7,12 @@
 //
 
 #import "ObjParser.h"
-
+struct TBN
+{
+    GLKVector3 tangent;
+    GLKVector3 bitangent;
+    GLKVector3 normal;
+};
 
 @implementation ObjParser
 {
@@ -224,6 +229,8 @@
                     textureVec3 = GLKVector2Make(0, 0);
                 }
                 
+                struct TBN tbnVectors = [self TBNvectorFromV1:positionVec1 V2:positionVec2 V3:positionVec3 UV1:textureVec1 UV2:textureVec2 UV3:textureVec3];
+                
                 if(_normalInfo)
                 {
                     if(smoothing)
@@ -234,7 +241,7 @@
                     }
                     else
                     {
-                        GLKVector3 normal = GLKVector3CrossProduct(GLKVector3Subtract(positionVec1, positionVec2), GLKVector3Subtract(positionVec2, positionVec3));
+                        GLKVector3 normal = tbnVectors.normal;
                         normalVec1 = normal;
                         normalVec2 = normal;
                         normalVec3 = normal;
@@ -247,17 +254,41 @@
                     normalVec3 = _normals[[[vertexInfo3 objectAtIndex:0] integerValue]-1];
                 }
                 
-                
                
-                _sceneVertices[sceneVertexIndex] =  (SceneVertex){positionVec1, {1.0f, 1.0f, 1.0f}, textureVec1, normalVec1};
-                _sceneVertices[sceneVertexIndex+1] = (SceneVertex){positionVec2, {1.0f, 1.0f, 1.0f}, textureVec2, normalVec2};
-                _sceneVertices[sceneVertexIndex+2] = (SceneVertex){positionVec3, {1.0f, 1.0f, 1.0f}, textureVec3, normalVec3};
+                _sceneVertices[sceneVertexIndex] =  (SceneVertex){positionVec1, {1.0f, 1.0f, 1.0f}, textureVec1, normalVec1, tbnVectors.tangent, tbnVectors.bitangent};
+                _sceneVertices[sceneVertexIndex+1] = (SceneVertex){positionVec2, {1.0f, 1.0f, 1.0f}, textureVec2, normalVec2, tbnVectors.tangent, tbnVectors.bitangent};
+                _sceneVertices[sceneVertexIndex+2] = (SceneVertex){positionVec3, {1.0f, 1.0f, 1.0f}, textureVec3, normalVec3, tbnVectors.tangent, tbnVectors.bitangent};
                 
                 sceneVertexIndex += 3;
             }
         }
     }
     _vertexCount = sceneVertexIndex;
+}
+
+-(struct TBN)TBNvectorFromV1:(GLKVector3)position1 V2:(GLKVector3)position2 V3:(GLKVector3)position3 UV1:(GLKVector2)texture1 UV2:(GLKVector2)texture2 UV3:(GLKVector2)texture3
+{
+    GLKVector3 normal = GLKVector3CrossProduct(GLKVector3Subtract(position1, position2), GLKVector3Subtract(position2, position3));
+    normal = GLKVector3Normalize(normal);
+    
+    GLKVector3 edge1 = GLKVector3Subtract(position2, position1);
+    GLKVector3 edge2 = GLKVector3Subtract(position3, position1);
+    GLKVector2 deltaUV1 = GLKVector2Subtract(texture2, texture1);
+    GLKVector2 deltaUV2 = GLKVector2Subtract(texture3, texture1);
+    
+    float f = (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
+    
+    float tangentX = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+    float tangentY = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+    float tangentZ = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+    GLKVector3 tangent = GLKVector3Normalize(GLKVector3Make(tangentX, tangentY, tangentZ));
+    
+    float bitangentX = -f * (deltaUV2.x * edge1.x - deltaUV1.x * edge2.x);
+    float bitangentY = -f * (deltaUV2.x * edge1.y - deltaUV1.x * edge2.y);
+    float bitangentZ = -f * (deltaUV2.x * edge1.z - deltaUV1.x * edge2.z);
+    GLKVector3 bitangent = GLKVector3Normalize(GLKVector3Make(bitangentX, bitangentY, bitangentZ));
+    
+    return (struct TBN){normal, tangent, bitangent};
 }
 
 -(NSArray *)split:(NSString *)string

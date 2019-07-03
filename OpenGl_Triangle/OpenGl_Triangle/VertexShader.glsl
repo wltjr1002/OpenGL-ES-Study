@@ -10,16 +10,20 @@ layout (location = 3) in vec3 normal;
 layout (location = 4) in vec3 tangent;
 layout (location = 5) in vec3 bitangent;
 
-out vec3 fcolor;
-out vec3 fnormal;
 out vec3 fposition;
+out vec3 fcolor;
 out vec2 ftexCoord;
+out mat3 ftbn;
 
 void main(){
     highp mat4 ModelViewMatrix = inverse(u_ViewMatrix) * u_ModelMatrix;
     gl_Position = u_ProjectionMatrix * ModelViewMatrix * vec4(position, 1.0f);
+    
+    fposition = (ModelViewMatrix * vec4(position, 1.0f)).xyz;
     fcolor = vcolor;
     ftexCoord = texCoord;
-    fnormal = (ModelViewMatrix * vec4(normal, 0.0f)).xyz;
-    fposition = (ModelViewMatrix * vec4(position, 1.0f)).xyz;
+    vec3 fnormal = (ModelViewMatrix * vec4(normal, 0.0f)).xyz;
+    vec3 ftangent = (ModelViewMatrix * vec4(tangent, 0.0f)).xyz;
+    vec3 fbitangent = (ModelViewMatrix * vec4(bitangent, 0.0f)).xyz;
+    ftbn = mat3(ftangent, fbitangent, fnormal);
 }

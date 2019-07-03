@@ -42,7 +42,7 @@
     glUniformMatrix4fv(viewMatrix_u, 1, 0, self.viewMatrix.m);
     glUniformMatrix4fv(projectionMatrix_u, 1, 0, self.projectionMatrix.m);
     
-    glUniform3f(lightColor_u, 1, 1, 1);
+    glUniform3f(lightColor_u, 0.7f, 0.7f, 0.7f);
     GLKVector3 lightDirection = GLKVector3Normalize(GLKVector3Make(2, -1, -3));
     glUniform3f(lightDirection_u, lightDirection.x, lightDirection.y, lightDirection.z);
     
@@ -86,6 +86,11 @@
     //set active texture 1(normalMap)
     glActiveTexture(GL_TEXTURE1);
     //set texture parameters;
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
     //bind and copy data
     GLuint texName;
     glGenTextures(1, &texName);

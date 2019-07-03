@@ -15,14 +15,13 @@ struct Material{
 };
 uniform Material u_Material;
 
-
 uniform sampler2D u_texture;
 uniform sampler2D u_normalMap;
 
-in vec3 fcolor;
-in vec3 fnormal;
 in vec3 fposition;
+in vec3 fcolor;
 in vec2 ftexCoord;
+in mat3 ftbn;
 
 out vec4 out_color;
 
@@ -32,7 +31,7 @@ void main(){
     //Ambient
     lowp vec4 AmbientColor = vec4(u_Material.ambient, 1.0) * vec4(u_Light.Color, 1.0);
     //Diffuse
-    lowp vec3 Normal = normalize(fnormal);
+    lowp vec3 Normal = normalize(ftbn * texture(u_normalMap, ftexCoord).rgb * 2.0 - 1.0);
     lowp float DiffuseFactor = max(-dot(Normal, LightDirection), 0.0);
     lowp vec4 DiffuseColor = vec4(u_Material.diffuse, 1.0) * vec4(u_Light.Color, 1.0) * DiffuseFactor;
     //Specular
@@ -42,4 +41,6 @@ void main(){
     lowp vec4 SpecularColor = vec4(u_Material.specular, 1.0) * vec4(u_Light.Color * SpecularFactor, 1.0);
     
     out_color = texture(u_texture, ftexCoord) * (AmbientColor + DiffuseColor + SpecularColor);
+    //out_color = (AmbientColor + DiffuseColor + SpecularColor) * 0.8;
+    //out_color = vec4(ftbn * Normal, 1.0);
 }
