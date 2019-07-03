@@ -17,7 +17,6 @@ struct TBN
 @implementation ObjParser
 {
     NSString* _filename;
-    NSArray* _data;
     struct Vertex* _vertices;
     GLKVector3* _normals;
     GLKVector2* _texCoords;
@@ -33,11 +32,14 @@ struct TBN
 {
     if(self = [super init])
     {
-        _data = [self ReadDataFromFilename:filename];
+        NSArray *data = [self ReadDataFromFilename:filename];
         _normalInfo = false;
         _textureInfo = false;
-        [self PostProcessing];
-        [self ProcessLines];
+        [self PostProcessing:data];
+        [self ProcessLines:data];
+        free(_vertices);
+        free(_normals);
+        free(_texCoords);
     }
     return self;
 }
@@ -74,10 +76,8 @@ struct TBN
     return lines;
 }
 
--(void)PostProcessing
+-(void)PostProcessing:(NSArray *)lines;
 {
-    NSArray* lines = _data;
-    
     // read file Before Parsing
     // Save info : #vertices, #faces
     int numVertex = 0;
@@ -121,10 +121,8 @@ struct TBN
     
 }
 
--(void)ProcessLines
+-(void)ProcessLines:(NSArray *)lines;
 {
-    NSArray* lines = _data;
-    
     // fill vertex, normal and textureCoordination array
     int vertexIndex = 0;
     int normalIndex = 0;
