@@ -16,7 +16,7 @@ out vec2 ftexCoord;
 out mat3 ftbn;
 
 void main(){
-    highp mat4 ModelViewMatrix = inverse(u_ViewMatrix) * u_ModelMatrix;
+    highp mat4 ModelViewMatrix = u_ViewMatrix * u_ModelMatrix;
     gl_Position = u_ProjectionMatrix * ModelViewMatrix * vec4(position, 1.0f);
     
     fposition = (ModelViewMatrix * vec4(position, 1.0f)).xyz;

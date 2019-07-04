@@ -11,11 +11,6 @@
 @implementation UserShader
 {
     GLuint programHandle;
-    GLuint modelMatrix_u;
-    GLuint viewMatrix_u;
-    GLuint projectionMatrix_u;
-    GLuint lightColor_u;
-    GLuint lightDirection_u;
     
     GLubyte* _texture;
     GLubyte* _normalMap;
@@ -32,6 +27,7 @@
     if(self = [super init])
     {
         [self prepareProgramWithVertexShader:vsPath FragmentShader:fsPath];
+        [self initializeTransform];
     }
     return self;
 }
@@ -39,13 +35,14 @@
 - (void) useProgram
 {
     glUseProgram(programHandle);
-    glUniformMatrix4fv(modelMatrix_u, 1, 0, self.modelMatrix.m);
-    glUniformMatrix4fv(viewMatrix_u, 1, 0, self.viewMatrix.m);
-    glUniformMatrix4fv(projectionMatrix_u, 1, 0, self.projectionMatrix.m);
     
-    glUniform3f(lightColor_u, 0.9f, 0.9f, 0.9f);
-    GLKVector3 lightDirection = GLKVector3Normalize(GLKVector3Make(2, -1, -3));
-    glUniform3f(lightDirection_u, lightDirection.x, lightDirection.y, lightDirection.z);
+    GLKVector3 lightDir = GLKVector3Normalize(GLKVector3Make(2, -1, -3));
+    [self SetUniform3f:"u_Light.Color" WithValueX:0.9f Y:0.9f Z:0.9f];
+    [self SetUniform3f:"u_Light.Direction" WithValueX:lightDir.x Y:lightDir.y Z:lightDir.z];
+    
+    [self SetUniformMat4:"u_ModelMatrix" WithMatrix:self.modelMatrix];
+    [self SetUniformMat4:"u_ViewMatrix" WithMatrix:self.viewMatrix];
+    [self SetUniformMat4:"u_ProjectionMatrix" WithMatrix:self.projectionMatrix];
     
     [self SetUniform1i:"u_texture" WithValue:0];
     [self SetUniform1i:"u_normalMap" WithValue:1];
@@ -126,6 +123,13 @@
     
 }
 
+- (void) initializeTransform
+{
+    self.modelMatrix = GLKMatrix4Identity;
+    self.viewMatrix = GLKMatrix4Identity;
+    self.projectionMatrix = GLKMatrix4Identity;
+}
+
 - (void)prepareProgramWithVertexShader:(NSString *)vsPath FragmentShader:(NSString *)fsPath
 {
     GLuint vertexShaderHandle = [self CompileShaderPath:vsPath WithType:GL_VERTEX_SHADER];
@@ -146,14 +150,6 @@
         NSLog(@"%@", messageString);
         exit(1);
     }
-    
-    self.modelMatrix = GLKMatrix4Identity;
-    modelMatrix_u = glGetUniformLocation(programHandle, "u_ModelMatrix");
-    viewMatrix_u = glGetUniformLocation(programHandle, "u_ViewMatrix");
-    projectionMatrix_u = glGetUniformLocation(programHandle, "u_ProjectionMatrix");
-    lightColor_u = glGetUniformLocation(programHandle, "u_Light.Color");
-    lightDirection_u = glGetUniformLocation(programHandle, "u_Light.Direction");
-    
 }
 
 - (GLuint)CompileShaderPath:(NSString *)shaderPath WithType:(GLenum)shaderType
@@ -207,17 +203,17 @@
     GLuint uniform =  glGetUniformLocation(programHandle, name);
     glUniform3i(uniform, value, value2, value3);
 }
--(void)SetUniformMat2:(const GLchar *)name WithMatrix:(const GLfloat *)value{
+-(void)SetUniformMat2:(const GLchar *)name WithMatrix:(GLKMatrix2)value{
     GLuint uniform =  glGetUniformLocation(programHandle, name);
-    glUniformMatrix2fv(uniform, 1, 0, value);
+    glUniformMatrix2fv(uniform, 1, 0, value.m);
 }
--(void)SetUniformMat3:(const GLchar *)name WithMatrix:(const GLfloat *)value{
+-(void)SetUniformMat3:(const GLchar *)name WithMatrix:(GLKMatrix3)value{
     GLuint uniform =  glGetUniformLocation(programHandle, name);
-    glUniformMatrix3fv(uniform, 1, 0, value);
+    glUniformMatrix3fv(uniform, 1, 0, value.m);
 }
--(void)SetUniformMat4:(const GLchar *)name WithMatrix:(const GLfloat *)value{
+-(void)SetUniformMat4:(const GLchar *)name WithMatrix:(GLKMatrix4)value{
     GLuint uniform =  glGetUniformLocation(programHandle, name);
-    glUniformMatrix4fv(uniform, 1, 0, value);
+    glUniformMatrix4fv(uniform, 1, 0, value.m);
 }
 
 @end

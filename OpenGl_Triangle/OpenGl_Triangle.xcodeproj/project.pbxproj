@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EB05874122BB7EF9002F749B /* portalTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EB05874022BB7EF9002F749B /* portalTexture.jpg */; };
-		EB2B3B1122C47E6200C146D8 /* SkyBoxVS.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EB2B3B1022C47E6200C146D8 /* SkyBoxVS.glsl */; };
-		EB2B3B1322C47E7C00C146D8 /* SkyBoxFS.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EB2B3B1222C47E7C00C146D8 /* SkyBoxFS.glsl */; };
+		EB33E58B22CCA68B004D4804 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = EB33E58A22CCA68B004D4804 /* Camera.m */; };
 		EB4CA16D22C4A7B700992839 /* trumpet.obj in Resources */ = {isa = PBXBuildFile; fileRef = EB4CA16C22C4A7B700992839 /* trumpet.obj */; };
 		EB4CA16F22C4A8A000992839 /* skyscraper.obj in Resources */ = {isa = PBXBuildFile; fileRef = EB4CA16E22C4A8A000992839 /* skyscraper.obj */; };
 		EB6C1B0122939EE6009820AA /* VertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = EB6C1AFD22939EE6009820AA /* VertexShader.glsl */; };
@@ -48,8 +47,8 @@
 
 /* Begin PBXFileReference section */
 		EB05874022BB7EF9002F749B /* portalTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = portalTexture.jpg; sourceTree = "<group>"; };
-		EB2B3B1022C47E6200C146D8 /* SkyBoxVS.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = SkyBoxVS.glsl; sourceTree = "<group>"; };
-		EB2B3B1222C47E7C00C146D8 /* SkyBoxFS.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = SkyBoxFS.glsl; sourceTree = "<group>"; };
+		EB33E58922CCA68B004D4804 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		EB33E58A22CCA68B004D4804 /* Camera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
 		EB4CA16C22C4A7B700992839 /* trumpet.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trumpet.obj; sourceTree = "<group>"; };
 		EB4CA16E22C4A8A000992839 /* skyscraper.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skyscraper.obj; sourceTree = "<group>"; };
 		EB6C1AFD22939EE6009820AA /* VertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexShader.glsl; sourceTree = "<group>"; };
@@ -142,8 +141,6 @@
 			children = (
 				EB6C1AFD22939EE6009820AA /* VertexShader.glsl */,
 				EB6C1B0022939EE6009820AA /* FragmentShader.glsl */,
-				EB2B3B1022C47E6200C146D8 /* SkyBoxVS.glsl */,
-				EB2B3B1222C47E7C00C146D8 /* SkyBoxFS.glsl */,
 				EB6C1AFF22939EE6009820AA /* UserShader.h */,
 				EB6C1AFE22939EE6009820AA /* UserShader.m */,
 				EB6C1B402293EBAF009820AA /* SceneVertex.h */,
@@ -201,6 +198,8 @@
 				EB8A86562297C151003F2BEB /* chCamera.h */,
 				EB8A86572297C151003F2BEB /* chCamera.m */,
 				EBCB61B02282E4A800CA8706 /* AppDelegate.h */,
+				EB33E58922CCA68B004D4804 /* Camera.h */,
+				EB33E58A22CCA68B004D4804 /* Camera.m */,
 				EBCB61B12282E4A800CA8706 /* AppDelegate.m */,
 				EBCB61B32282E4A800CA8706 /* ViewController.h */,
 				EBCB61B42282E4A800CA8706 /* ViewController.m */,
@@ -290,12 +289,10 @@
 				EB6C1B0322939EE6009820AA /* FragmentShader.glsl in Resources */,
 				EB7BF2E722C9FEFF0068FECE /* Japanese_Temple_Paint2_Japanese_Shrine_Mat_Roughness.png in Resources */,
 				EBA7F74B22C37655007C6DF1 /* lamp.obj in Resources */,
-				EB2B3B1122C47E6200C146D8 /* SkyBoxVS.glsl in Resources */,
 				EB7BF2DE22C9ED110068FECE /* temple.obj in Resources */,
 				EBCB61B82282E4A800CA8706 /* Main.storyboard in Resources */,
 				EB7BF2DC22C9EAF30068FECE /* skull.obj in Resources */,
 				EBA7F74622C3650A007C6DF1 /* magnolia.obj in Resources */,
-				EB2B3B1322C47E7C00C146D8 /* SkyBoxFS.glsl in Resources */,
 				EB7BF2DA22C9CE310068FECE /* cube.obj in Resources */,
 				EB7BF2D822C9C9080068FECE /* tetrahedron.obj in Resources */,
 				EB05874122BB7EF9002F749B /* portalTexture.jpg in Resources */,
@@ -320,6 +317,7 @@
 				EB7BF2EC22C9FF750068FECE /* Temple.m in Sources */,
 				EBCB61C02282E4A900CA8706 /* main.m in Sources */,
 				EBCB61B22282E4A800CA8706 /* AppDelegate.m in Sources */,
+				EB33E58B22CCA68B004D4804 /* Camera.m in Sources */,
 				EBD1F9B422C0A51800271E02 /* ObjParser.m in Sources */,
 				EB6C1B3F2293EB75009820AA /* Model.m in Sources */,
 				EBB466A322C1EE6F00AC460A /* ObjectModel.m in Sources */,

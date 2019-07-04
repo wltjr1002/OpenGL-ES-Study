@@ -32,9 +32,9 @@
 -(void)SetUniform1i:(const GLchar *)name WithValue:(int)value;
 -(void)SetUniform2i:(const GLchar *)name WithValueX:(int)value Y:(int)value2;
 -(void)SetUniform3i:(const GLchar *)name WithValueX:(int)value Y:(int)value2 Z:(int)value3;
--(void)SetUniformMat2:(const GLchar *)name WithMatrix:(const GLfloat *)value;
--(void)SetUniformMat3:(const GLchar *)name WithMatrix:(const GLfloat *)value;
--(void)SetUniformMat4:(const GLchar *)name WithMatrix:(const GLfloat *)value;
+-(void)SetUniformMat2:(const GLchar *)name WithMatrix:(GLKMatrix2)value;
+-(void)SetUniformMat3:(const GLchar *)name WithMatrix:(GLKMatrix3)value;
+-(void)SetUniformMat4:(const GLchar *)name WithMatrix:(GLKMatrix4)value;
 
 @end
 

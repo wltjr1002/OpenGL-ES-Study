@@ -12,6 +12,7 @@
 #import "ObjectModel.h"
 #import "Object/Temple.h"
 #import "chCamera.h"
+#import "Camera.h"
 
 
 @interface ViewController ()
@@ -22,10 +23,10 @@
 @implementation ViewController
 {
     UserShader * _shader;
-    UserShader * _skyboxShader;
     ObjectModel * _objModel;
     
     chCamera * _camera;
+    Camera * _camera2;
     GLKMatrix4 viewMatrix;
     
     __weak IBOutlet UIButton *Button_Right;
@@ -35,35 +36,36 @@
 }
 
 - (IBAction)leftPressed:(id)sender {
-    [_camera ProcessKeyboard:LEFT deltaTime:0.016f];
+    [_camera2 MovePositionFront:0 Right:-1];
 }
 - (IBAction)rightPressed:(id)sender {
-    [_camera ProcessKeyboard:RIGHT deltaTime:0.016f];
+    [_camera2 MovePositionFront:0 Right:1];
 }
 - (IBAction)upPressed:(id)sender {
-    [_camera ProcessKeyboard:FORWARD deltaTime:0.01f];
+    [_camera2 MovePositionFront:1 Right:0];
 }
 - (IBAction)downPressed:(id)sender {
-    [_camera ProcessKeyboard:BACKWARD deltaTime:0.01f];
+    [_camera2 MovePositionFront:-1 Right:0];
 }
 
 - (void) setupSceneWithView:(GLKView *)view
 {
+    //OpenGL setting
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    
     //shader setting
     _shader = [[UserShader alloc] initWithVertexShaderPath:@"VertexShader.glsl" FragmentShaderPath:@"FragmentShader.glsl"];
-    GLKMatrix4 projectionMat = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(85.0), self.view.bounds.size.width/self.view.bounds.size.height, 1, 300);
-    _shader.projectionMatrix = projectionMat;
+    _shader.projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(85.0), self.view.bounds.size.width/self.view.bounds.size.height, 1, 300);
     
     //camera setting
-    _camera = [[chCamera alloc] init];
+    _camera = [[chCamera alloc] initWithPosition:GLKVector3Make(0, 0, 1.0f)];
+    _camera2 = [[Camera alloc] initWithPosition:GLKVector3Make(0, 0, -30)];
     lastPosX = view.self.frame.size.width / 2;
     lastPosY = view.self.frame.size.height / 2;
     
-    
     //scene setting
     _objModel = [[Temple alloc] initWithShader:_shader];
-    
-    _objModel.position = GLKVector3Make(0, -10, -30);
 }
 
 - (void)viewDidLoad {
@@ -83,14 +85,11 @@
     glClearColor(200.0/255.0, 200.0/255.0, 200.0/255.0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    
     [_camera GetViewMatrix: &viewMatrix];
     _shader.viewMatrix = viewMatrix;
+    _shader.viewMatrix = [_camera2 ViewMatrix];
         
     [_objModel render];
-    
 }
 
 -(void)update{
@@ -117,9 +116,9 @@
     lastPosX = p.x;
     lastPosY = p.y;
     
-    [_camera ProcessMouseMovement:false Xoffset:xoffset Yoffset:yoffset];
+    //[_camera ProcessMouseMovement:false Xoffset:xoffset Yoffset:yoffset];
+    [_camera2 RotateYaw:-xoffset Pitch:-yoffset];
     
-    //NSLog(@"touch X : %f Y : %f", p.x, p.y);
 }
 // Input Methods
 @end
