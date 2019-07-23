@@ -59,10 +59,7 @@
     _shader.projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(85.0), self.view.bounds.size.width/self.view.bounds.size.height, 1, 300);
     
     //camera setting
-    _camera = [[chCamera alloc] initWithPosition:GLKVector3Make(0, 0, 1.0f)];
-    _camera2 = [[Camera alloc] initWithPosition:GLKVector3Make(0, 0, -30)];
-    lastPosX = view.self.frame.size.width / 2;
-    lastPosY = view.self.frame.size.height / 2;
+    _camera2 = [[Camera alloc] initWithPosition:GLKVector3Make(0, 10, 30)];
     
     //scene setting
     _objModel = [[Temple alloc] initWithShader:_shader];
@@ -82,7 +79,7 @@
 
 -(void)glkView:(GLKView *)view drawInRect:(CGRect)rect{
     
-    glClearColor(200.0/255.0, 200.0/255.0, 200.0/255.0, 1.0f);
+    glClearColor(220.0/255.0, 220.0/255.0, 220.0/255.0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     [_camera GetViewMatrix: &viewMatrix];

@@ -49,7 +49,7 @@
     float positionArray[] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -Position.x, -Position.y, -Position.z, 1};
     pos = GLKMatrix4MakeWithArray(positionArray);
     
-    view = GLKMatrix4Multiply(rotate, pos);
+    view = GLKMatrix4Multiply(rotate,pos);
     return view;
 }
 
@@ -60,7 +60,7 @@
 }
 -(void)RotateYaw:(float)dy Pitch:(float)dp
 {
-    Yaw += dy * speed;
+    Yaw -= dy * speed;
     Pitch += dp * speed;
     Pitch = MAX(-89.9, MIN(89, Pitch));
     [self CalculateVectorsFromYawPitch];
@@ -73,7 +73,7 @@
     float x = cos(pitchRadian) * cos(yawRadian);
     float y = sin(pitchRadian);
     float z = cos(pitchRadian) * sin(yawRadian);
-    _frontVector = GLKVector3Normalize(GLKVector3Make(x, y, z));
+    _frontVector = GLKVector3Normalize(GLKVector3Make(x, y, -z));
     _rightVector = GLKVector3Normalize(GLKVector3CrossProduct(_frontVector, _upVector));
     _upVector = GLKVector3Normalize(GLKVector3CrossProduct(_rightVector, _frontVector));
 }

@@ -34,7 +34,7 @@ void main(){
     
 // Phong Lighting Model
     lowp vec3 LightDirection = u_Light.Direction;
-    lowp vec3 Normal = normalize(ftbn * bump * 2.0 - 1.0);
+    lowp vec3 Normal = normalize(ftbn * (bump * 2.0 - 1.0));
     
     //Ambient
     lowp vec4 AmbientColor = vec4(u_Material.ambient, 1.0) * vec4(u_Light.Color, 1.0) * AOFactor;
@@ -51,5 +51,4 @@ void main(){
     
     out_color = FragColor * (AmbientColor + DiffuseColor + SpecularColor);
     //out_color = (AmbientColor + DiffuseColor + SpecularColor) * 0.8;
-    //out_color = vec4(ftbn * Normal, 1.0);
 }
